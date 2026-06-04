@@ -1,16 +1,16 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { Home, Calendar, Pill, Salad, UserCircle } from "lucide-react";
+import { Home, Calendar, Pill, MessageCircle, UserCircle } from "lucide-react";
 
 export function PatientLayout() {
   const { t } = useTranslation();
 
   const nav = [
-    { to: "/",            icon: Home,       label: t("nav.home") },
-    { to: "/checklist",   icon: Calendar,   label: t("nav.checklist") },
-    { to: "/medications", icon: Pill,        label: t("nav.medications") },
-    { to: "/diet",        icon: Salad,       label: t("nav.diet") },
-    { to: "/profile",     icon: UserCircle,  label: t("nav.profile") },
+    { to: "/",            icon: Home,          label: t("nav.home") },
+    { to: "/checklist",   icon: Calendar,      label: t("nav.checklist") },
+    { to: "/medications", icon: Pill,          label: t("nav.medications") },
+    { to: "/chat",        icon: MessageCircle, label: t("nav.chat") },
+    { to: "/profile",     icon: UserCircle,    label: t("nav.profile") },
   ];
 
   return (
