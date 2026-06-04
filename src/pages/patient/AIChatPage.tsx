@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ArrowLeft, MoreVertical, Mic, Send, Bot, TrendingDown } from "lucide-react";
+import { ArrowLeft, MoreVertical, Send, Bot, TrendingDown } from "lucide-react";
 
 interface Message {
   role: "user" | "assistant";
@@ -144,9 +144,6 @@ export default function AIChatPage() {
       )}
 
       <div className="flex-shrink-0 px-4 py-3 flex items-center gap-2" style={{ background: "var(--surface-card)", borderTop: "1px solid var(--border)" }}>
-        <button style={{ background: "none", border: "none", cursor: "pointer", padding: "4px", flexShrink: 0 }}>
-          <Mic size={20} style={{ color: "var(--text-muted)" }} />
-        </button>
         <input type="text" placeholder={t("patient.chat.placeholder")} value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && sendText(input.trim())}
