@@ -1,0 +1,428 @@
+{
+  "common": {
+    "appName": "Hospital AI",
+    "loading": "Yuklanmoqda...",
+    "save": "Saqlash",
+    "cancel": "Bekor qilish",
+    "close": "Yopish",
+    "submit": "Yuborish",
+    "back": "Orqaga",
+    "next": "Keyingi",
+    "edit": "Tahrirlash",
+    "delete": "O‘chirish",
+    "viewAll": "Hammasini ko‘rish",
+    "search": "Qidirish",
+    "filter": "Filtr",
+    "details": "Batafsil",
+    "yes": "Ha",
+    "no": "Yo‘q",
+    "optional": "(ixtiyoriy)",
+    "today": "Bugun",
+    "yesterday": "Kecha",
+    "tomorrow": "Ertaga",
+    "days": "kun",
+    "day": "Kun",
+    "of": "/",
+    "ago": "oldin",
+    "in": "keyin",
+    "now": "Hozir",
+    "high": "Yuqori",
+    "medium": "O‘rta",
+    "low": "Past",
+    "normal": "Normal",
+    "elevated": "Ko‘tarilgan",
+    "fever": "Isitma",
+    "completed": "Bajarildi",
+    "showing": "Ko‘rsatilmoqda",
+    "patients": "bemor"
+  },
+  "language": {
+    "label": "Til",
+    "en": "Inglizcha",
+    "ru": "Ruscha",
+    "uz": "O‘zbekcha"
+  },
+  "greetings": {
+    "morning": "Ertalab",
+    "afternoon": "Kunduzi",
+    "evening": "Kechqurun",
+    "goodMorning": "Xayrli tong",
+    "goodAfternoon": "Xayrli kun",
+    "goodEvening": "Xayrli kech",
+    "doctorOverview": "Bugungi bemorlaringiz holati.",
+    "patientFeeling": "Bugun tiklanish jarayonida o‘zingizni qanday his qilyapsiz?"
+  },
+  "nav": {
+    "dashboard": "Bosh sahifa",
+    "patients": "Bemorlar",
+    "alerts": "Xabarlar",
+    "settings": "Sozlamalar",
+    "logout": "Chiqish",
+    "home": "Bosh sahifa",
+    "checklist": "Vazifalar",
+    "medications": "Dorilar",
+    "diet": "Parhez",
+    "chat": "AI Chat",
+    "checkIn": "Tekshiruv",
+    "profile": "Profil",
+    "clinicianPortal": "Klinitsist portali",
+    "chiefOncologist": "Bosh onkolog",
+    "searchPlaceholder": "Bemorlar, yozuvlar yoki xabarlarni qidirish..."
+  },
+  "status": {
+    "RECOVERING": "Tiklanmoqda",
+    "AT_RISK": "Xavf ostida",
+    "PRE_OP": "Operatsiya oldi",
+    "RECOVERED": "Sog‘aygan"
+  },
+  "severity": {
+    "CRITICAL": "Kritik",
+    "WARNING": "Ogohlantirish",
+    "INFO": "Ma’lumot",
+    "RESOLVED": "Hal qilindi"
+  },
+  "alertTypes": {
+    "HIGH_TEMPERATURE": "Yuqori harorat haqida ogohlantirish",
+    "HIGH_PAIN": "Og‘riq darajasi oshdi",
+    "MISSED_MEDICATION": "Dori qabul qilinmadi",
+    "default": "Xabar"
+  },
+  "auth": {
+    "tabs": {
+      "clinician": "Shifokor",
+      "patient": "Bemor"
+    },
+    "doctor": {
+      "title": "Shifokor kirishi",
+      "subtitle": "Portalga kirish uchun ma’lumotlaringizni kiriting.",
+      "emailLabel": "KASBIY EMAIL",
+      "emailPlaceholder": "name@hospital.ai",
+      "passwordLabel": "PAROL",
+      "forgot": "Esdan chiqdimi?",
+      "keepLoggedIn": "Ushbu seans uchun meni eslab qol",
+      "signIn": "Xavfsiz kirish",
+      "signingIn": "Kirilmoqda...",
+      "needAccess": "Ruxsat kerakmi?",
+      "contactAdmin": "Administrator bilan bog‘laning",
+      "invalidCredentials": "Ma’lumotlar noto‘g‘ri. amir@hospital.ai / password sinab ko‘ring",
+      "welcomeBack": "Xush kelibsiz, Dr. {{name}}",
+      "heroTitle": "Yuqori darajadagi parvarish uchun aqlli tahlillar.",
+      "heroSubtitle": "Yangi avlod klinitsist portali — yuqori ishonchlilik va xirurgik aniqlik uchun ishlab chiqilgan. Bemor yozuvlari, AI diagnostikasi va shifoxona tahlili bitta xavfsiz interfeysda.",
+      "feature1": "HIPAA talablariga mos ma’lumotlar arxitekturasi",
+      "feature2": "Real vaqt rejimida diagnostik tavsiyalar",
+      "privacy": "Maxfiylik siyosati",
+      "security": "Xavfsizlik standartlari",
+      "areYouPatient": "Bemor misiz?",
+      "patientLogin": "Bemor kirishi"
+    },
+    "patient": {
+      "title": "Xavfsiz kirish",
+      "subtitle": "Oxirgi tashrifda berilgan noyob kirish kodini kiriting.",
+      "heroTitle": "Sizning sog'liq portali kutmoqda.",
+      "heroSubtitle": "Bemorga yo'naltirilgan tiklanish interfeysli xavfsiz kirish — tibbiy yozuvlar, davolash rejasi va AI yordami.",
+      "verification": "BEMORNI TASDIQLASH",
+      "unlock": "Portalga kirish",
+      "invalidCode": "Kod noto‘g‘ri — 1234 ni sinab ko‘ring",
+      "welcomeBack": "Xush kelibsiz, {{name}}!",
+      "lostCode": "Kodingiz yo‘qoldimi?",
+      "contactSupport": "Yordamga murojaat",
+      "poweredBy": "Hospital AI Clinical Precision Systems tomonidan"
+    }
+  },
+  "doctor": {
+    "dashboard": {
+      "stats": {
+        "totalPatients": "JAMI BEMORLAR",
+        "atRisk": "XAVF OSTIDA",
+        "recovering": "TIKLANMOQDA",
+        "unreadAlerts": "O‘QILMAGAN XABARLAR",
+        "actionRequired": "Harakat kerak",
+        "steadyRise": "Barqaror o‘sish",
+        "highPriority": "Yuqori ustuvorlik"
+      },
+      "recentPatients": "So‘nggi bemorlar",
+      "viewAllPatients": "Barcha bemorlar",
+      "columns": {
+        "name": "BEMOR ISMI",
+        "status": "HOLATI",
+        "lastCheckIn": "OXIRGI TEKSHIRUV",
+        "vitals": "KO‘RSATKICHLAR",
+        "actions": "AMALLAR"
+      },
+      "reviewCase": "Holatni ko‘rish",
+      "recoveryAnalytics": "Tiklanish tahlili",
+      "forecastedTrend": "Bashorat trendi",
+      "aiAdvisor": "AI Klinik maslahatchi",
+      "smartAlert": "AQLLI OGOHLANTIRISH",
+      "optimization": "OPTIMALLASHTIRISH",
+      "viewAiInsights": "AI tahlillarni ko‘rish",
+      "checkInSource": {
+        "wearable": "kiyiladigan qurilma orqali",
+        "clinic": "klinikada tashrif",
+        "mobile": "mobil sinxronlash"
+      }
+    },
+    "patients": {
+      "title": "Bemorlar katalogi",
+      "subtitle": "Tiklanish jarayoni va xirurgik guruhlarni boshqarish.",
+      "newPatient": "Yangi bemor",
+      "noMatch": "\"{{query}}\" bo‘yicha bemor topilmadi",
+      "columns": {
+        "patient": "BEMOR",
+        "surgery": "OPERATSIYA TURI",
+        "status": "HOLATI",
+        "painScore": "OG‘RIQ DARAJASI",
+        "actions": "AMALLAR"
+      },
+      "surgeryTomorrow": "Ertaga operatsiya",
+      "postOpDay": "Operatsiyadan keyingi {{day}}-kun",
+      "age": "Yosh",
+      "showingCount": "{{total}} bemordan {{shown}} tasi ko‘rsatilmoqda",
+      "criticalAlerts": "Kritik xabarlar",
+      "patientsRequireAttention_one": "{{count}} bemorga shoshilinch e’tibor kerak.",
+      "patientsRequireAttention_other": "{{count}} bemorga shoshilinch e’tibor kerak.",
+      "highPainReported": "Yuqori og‘riq darajasi ({{score}}/10) 15 daqiqa oldin qayd etildi.",
+      "viewAllAlerts": "Barcha xabarlar",
+      "recoveryAnalytics": "Tiklanish tahlili",
+      "activityScore": "Bemor faoliyati ko‘rsatkichi (o‘rtacha)"
+    },
+    "patientDetail": {
+      "breadcrumb": "Bemorlar",
+      "caseId": "Holat #PT-{{id}}",
+      "notFound": "Bemor topilmadi.",
+      "editProfile": "Profilni tahrirlash",
+      "exportDossier": "Dosyeni eksport qilish",
+      "recoveryProgress": "Tiklanish jarayoni",
+      "dayOfTotal": "{{total}} dan {{day}}",
+      "onTrack": "+ REJADA",
+      "estimatedCompletion": "Taxminiy tugash: {{date}}",
+      "metrics": {
+        "mobility": "HARAKATCHANLIK",
+        "adherence": "REJAGA AMAL QILISH",
+        "painAvg": "O‘RT. OG‘RIQ"
+      },
+      "painTrend": "Og‘riq darajasi tendentsiyasi",
+      "painTrendSubtitle": "Kunlik o‘z-o‘zini baholash (7 kun)",
+      "recentHistory": "So‘nggi tarix",
+      "viewAllActivities": "Barcha hodisalar",
+      "carePlanStrategy": "Davolash rejasi strategiyasi",
+      "activeMedications": "Faol dorilar",
+      "modifyRx": "+ Retseptni o‘zgartirish",
+      "physicalTherapy": "Fizioterapiya",
+      "aiNotes": "AI klinitsist eslatmalari",
+      "activeResistanceL3": "Faol qarshilik, 3-daraja",
+      "acceptAi": "AI tavsiyalarini qabul qilish"
+    },
+    "alerts": {
+      "title": "Xabarlar markazi",
+      "subtitle": "Real vaqt bemor monitoringi va kritik diagnostik yangiliklari.",
+      "markAllRead": "Hammasini o‘qildi deb belgilash",
+      "markRead": "O‘qildi",
+      "active": "FAOL",
+      "dismissed": "BEKOR QILINDI",
+      "allClear": "Hammasi tinch",
+      "noAlerts": "Hozircha xabarlar yo‘q",
+      "summary": {
+        "critical": "Kritik",
+        "warning": "Ogohlantirish",
+        "info": "Ma’lumot",
+        "resolved": "Hal qilindi"
+      },
+      "actions": {
+        "emergencyResponse": "Shoshilinch javob",
+        "viewLabs": "Tahlillarni ko‘rish",
+        "reviewDocument": "Hujjatni ko‘rish"
+      },
+      "predictive": "BASHORATLI TAHLILLAR",
+      "priorityRisk": "USTUVOR XAVF",
+      "sepsisTitle": "Sepsis boshlanish bashorati",
+      "sepsisBody": "Oxirgi 12 soatdagi biometrik tendentsiyaga ko‘ra, Bemor 882 (V. Thorne) da 4 soat ichida sepsis boshlanish ehtimoli 78%. Erta aralashuv to‘plami tavsiya etiladi.",
+      "initiateBundle": "To‘plamni ishga tushirish",
+      "resourceAlert": "RESURS XABARI",
+      "resourceTitle": "Resurs xabari",
+      "resourceBody": "Reanimatsiya o‘rinlari 22:00 ga kelib 100% to‘lishi kutilmoqda. O‘tkazish nomzodlarini ko‘rib chiqing.",
+      "currentLoad": "Joriy yuk"
+    }
+  },
+  "patient": {
+    "profile": {
+      "verifiedPatient": "BEMOR TASDIQLANGAN",
+      "recoveryProgress": "TIKLANISH JARAYONI",
+      "dayOf": "{{day}}-kun / {{total}}",
+      "percentComplete": "{{pct}}% bajarildi",
+      "surgery": "Operatsiya",
+      "surgeryDate": "Operatsiya sanasi",
+      "accessCode": "Kirish kodi",
+      "email": "Elektron pochta",
+      "phone": "Telefon",
+      "contactSupport": "Yordamga murojaat"
+    },
+    "home": {
+      "recoveryPhase1": "Tiklanish bosqichi 1",
+      "recoveryPhase2": "Tiklanish bosqichi 2",
+      "recoveryPhase3": "Tiklanish bosqichi 3",
+      "fullRecovery": "To‘liq tiklanish",
+      "phaseProgress": "Tiklanish yo‘lingizning {{pct}}% qismi bosib o‘tildi.",
+      "dailyCheckIn": "Kunlik tekshiruv",
+      "todaysSchedule": "Bugungi jadval",
+      "noTasks": "Bugun vazifalar yo‘q",
+      "weeklyVitality": "Haftalik holat",
+      "pain": "OG‘RIQ",
+      "steadyProgress": "Barqaror taraqqiyot"
+    },
+    "checklist": {
+      "title": "Bugungi vazifalar",
+      "progress": "{{total}} dan {{done}} ta bajarildi",
+      "empty": "Bugun vazifalar yo‘q",
+      "emptyHint": "Davolash rejangiz tayinlangach shu yerda ko‘rinadi",
+      "allDone": "Bugun hammasi bajarildi",
+      "allDoneHint": "Zo‘r! Tiklanish rejasiga mukammal amal qilyapsiz."
+    },
+    "medications": {
+      "dailyProgress": "KUNLIK NATIJA",
+      "title": "Sizning dorilaringiz",
+      "completedToday": "Bugun {{total}} dan {{done}} tasi qabul qilindi",
+      "empty": "Tayinlangan dorilar yo‘q",
+      "emptyHint": "Dori qabul jadvalingiz shu yerda ko‘rinadi",
+      "nowDue": "HOZIR QABUL QILING",
+      "take": "Qabul qilish",
+      "category": "Toifa",
+      "sideEffects": "Yon ta’sirlari",
+      "recoveryInsight": "Tiklanish maslahati",
+      "insightBody": "Bu hafta dori qabul jadvaliga amal qilish darajasi yuqori. Barqarorlikni saqlashda davom eting.",
+      "stability": "+12% barqarorlik",
+      "hydrationAlert": "Suv iste’moli haqida",
+      "hydrationBody": "Kunduzgi dozada so‘rilishni yaxshilash uchun suv iste’molini oshirish tavsiya etiladi.",
+      "windowWarning": "Dorilar faqat belgilangan oraliqda ochiladi. Dozani o‘tkazib yuborgan bo‘lsangiz, ikkilantirmang — AI Chat orqali shifokoringizga murojaat qiling."
+    },
+    "diet": {
+      "title": "Parhez bo‘yicha tavsiyalar",
+      "subtitle": "Tiklanish bosqichingizga moslangan",
+      "prescribed": "TAYINLANGAN",
+      "empty": "Hozircha parhez tayinlanmagan",
+      "emptyHint": "Shifokoringiz parhez ko‘rsatmalarini shu yerga qo‘shadi",
+      "tipsHeading": "TIKLANISH UCHUN OZIQLANISH MASLAHATLARI",
+      "tips": {
+        "protein": {
+          "title": "Yuqori oqsil",
+          "desc": "Tovuq, baliq, tuxum, dukkaklilar — tana vazni 1 kg ga 1.2 g"
+        },
+        "antiInflammatory": {
+          "title": "Yallig‘lanishga qarshi",
+          "desc": "Brokkoli, rezavorlar, yashil bargli sabzavotlar, zarchava"
+        },
+        "hydration": {
+          "title": "Suv iste’moli",
+          "desc": "To‘qima tiklanishini qo‘llab-quvvatlash uchun kuniga 8–10 stakan suv"
+        },
+        "avoid": {
+          "title": "Qochish kerak",
+          "desc": "Alkogol, qayta ishlangan oziq-ovqat, ortiqcha tuz"
+        }
+      }
+    },
+    "chat": {
+      "title": "AI Sog‘liq maslahatchisi",
+      "secureActive": "XAVFSIZ AI FAOL",
+      "placeholder": "Sog‘liq bo‘yicha savolingizni yozing...",
+      "aiAssistant": "AI Yordamchi",
+      "you": "Siz",
+      "quickChips": {
+        "logPain": "Og‘riqni yozish",
+        "checkMeds": "Dori jadvali",
+        "talk": "Suhbatlashish"
+      },
+      "initialMessage": "Xayrli tong. Kiyiladigan qurilmangizdan oxirgi tiklanish ko‘rsatkichlarini ko‘rib chiqdim. Harakatchanlik darajangiz barqaror yaxshilanmoqda. Bugun o‘zingizni qanday his qilyapsiz?",
+      "replies": {
+        "pain": "Operatsiyadan keyingi ozgina og‘riq normal hisoblanadi. 1–10 shkalada erta tiklanishda 3–4 daraja kutiladi. Agar 7 dan yuqori yoki keskin/kuchli bo‘lsa — darhol shifokorga murojaat qiling. Ibuprofenni rejaga muvofiq qabul qilyapsizmi?",
+        "fever": "38°C dan yuqori harorat infektsiyani ko‘rsatishi mumkin va e’tibor talab qiladi. Bugun shifokoringizga murojaat qiling. Bu vaqt ichida suv iching va dam oling.",
+        "medication": "Joriy dorilaringiz: Ibuprofen 400 mg — ertalab (8:00) va kechqurun (20:00). Doim ovqat bilan qabul qiling.",
+        "exercise": "Tiklanishning ikkinchi haftasida yengil ertalabki qotishlik kutiladi. Har soatda yumshoq oyoq mashqlari va qultiq tayoqlari bilan qisqa sayrlar tavsiya etiladi.",
+        "default": "Tashvishingizni tushunaman. Sizning holatingizda davolash rejangizga murojaat qilishingiz yoki bevosita shifokoringizga bog‘lanishingiz tavsiya etiladi. Tiklanish bo‘yicha aniq nimadir bilan yordam bera olamanmi?"
+      }
+    },
+    "checkIn": {
+      "title": "Kunlik tekshiruv",
+      "greeting": "Xayrli tong, {{name}}.",
+      "currentMood": "Hozirgi kayfiyat",
+      "painLevel": "Og‘riq darajasi",
+      "painNone": "Yo‘q",
+      "painSevere": "Kuchli",
+      "bodyTemperature": "Tana harorati",
+      "symptomsToday": "Bugungi alomatlar",
+      "additionalNotes": "Qo‘shimcha izohlar",
+      "notesPlaceholder": "Shifokoringiz bilishi kerak bo‘lgan boshqa narsa...",
+      "submit": "Kunlik hisobotni yuborish",
+      "encrypted": "Yuborilgan ma’lumotlar shifrlangan va faqat tibbiy jamoangiz uchun ko‘rinadi.",
+      "aiHealthGuide": "AI Sog‘liq maslahatchisi",
+      "completeHeading": "Yozildi",
+      "completeBanner": "TEKSHIRUV YAKUNLANDI · XAVF: {{risk}}",
+      "todaysVitals": "BUGUNGI KO‘RSATKICHLAR",
+      "vitals": {
+        "pain": "Og‘riq",
+        "temp": "Harorat",
+        "symptoms": "Alomatlar"
+      },
+      "messages": {
+        "high": "Shifokoringiz ko‘tarilgan alomatlar haqida xabardor qilindi.",
+        "medium": "Tiklanishingiz kuzatuv ostida. Davolash rejasiga amal qiling.",
+        "low": "Ajoyib taraqqiyot. Tiklanish rejasiga amal qilishda davom eting."
+      },
+      "aiInsight": {
+        "low": "So‘nggi 3 kunda og‘riq darajangiz pasayib bormoqda. Tayinlangan yengil harakat rejimini davom ettiring.",
+        "medium": "O‘rtacha noqulaylik aniqlandi. Dorilarni vaqtida qabul qiling va yetarli dam oling.",
+        "high": "Og‘riq darajangiz yuqori. Agar bugun davom etsa, shifokoringizga murojaat qiling."
+      },
+      "backToHome": "Bosh sahifaga"
+    },
+    "report": {
+      "title": "Anonim shikoyat",
+      "subtitle": "Shaxsingiz xodimlar bilan baham ko'rilmaydi.",
+      "anonymous": "ANONIM VA MAXFIY",
+      "categoryLabel": "Bu nima haqida?",
+      "categories": {
+        "doctor": "Shifokor",
+        "nurse": "Hamshira",
+        "service": "Xizmat",
+        "facility": "Muassasa",
+        "medication": "Dori",
+        "other": "Boshqa"
+      },
+      "detailsLabel": "Muammoni tasvirlab bering",
+      "detailsPlaceholder": "Nima bo'lganini imkon qadar batafsil tasvirlab bering...",
+      "urgencyLabel": "Shoshilinchlik",
+      "urgency": { "low": "Past", "medium": "O'rta", "high": "Yuqori" },
+      "submit": "Shikoyat yuborish",
+      "successTitle": "Shikoyat yuborildi",
+      "successBody": "Rahmat. Anonim shikoyatingiz qabul qilindi va 24 soat ichida kasalxona rahbariyati tomonidan ko'rib chiqiladi.",
+      "backToProfile": "Profilga qaytish",
+      "reportIssue": "Shikoyat qilish"
+    }
+  },
+  "settings": {
+    "saved": "Sozlamalar saqlandi",
+    "save": "O‘zgarishlarni saqlash",
+    "pushNotifications": "Push-bildirishnomalar",
+    "pushNotificationsDesc": "Muhim xabarlar va bemor yangiliklari",
+    "darkMode": "Tungi rejim",
+    "comingSoon": "Tez orada",
+    "securityNote": "Seans shifrlangan va sizning klinitsist hisobingizga bog‘langan. Har qanday qurildan chiqing bekor qilish uchun."
+  },
+  "mood": {
+    "low": "Past",
+    "neutral": "O‘rtacha",
+    "good": "Yaxshi",
+    "great": "A’lo",
+    "strong": "Tetik"
+  },
+  "symptoms": {
+    "Fatigue": "Charchoq",
+    "Dizziness": "Bosh aylanishi",
+    "Nausea": "Ko‘ngil aynishi",
+    "Headache": "Bosh og‘rig‘i",
+    "Insomnia": "Uyqusizlik",
+    "Cough": "Yo‘tal",
+    "Chills": "Titroq",
+    "Swelling": "Shish"
+  }
+}

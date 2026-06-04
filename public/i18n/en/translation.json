@@ -1,0 +1,428 @@
+{
+  "common": {
+    "appName": "Hospital AI",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "submit": "Submit",
+    "back": "Back",
+    "next": "Next",
+    "edit": "Edit",
+    "delete": "Delete",
+    "viewAll": "View All",
+    "search": "Search",
+    "filter": "Filter",
+    "details": "Details",
+    "yes": "Yes",
+    "no": "No",
+    "optional": "(optional)",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "tomorrow": "Tomorrow",
+    "days": "Days",
+    "day": "Day",
+    "of": "of",
+    "ago": "ago",
+    "in": "in",
+    "now": "Now",
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low",
+    "normal": "Normal",
+    "elevated": "Elevated",
+    "fever": "Fever",
+    "completed": "Completed",
+    "showing": "Showing",
+    "patients": "patients"
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "ru": "Russian",
+    "uz": "Uzbek"
+  },
+  "greetings": {
+    "morning": "Morning",
+    "afternoon": "Afternoon",
+    "evening": "Evening",
+    "goodMorning": "Good Morning",
+    "goodAfternoon": "Good Afternoon",
+    "goodEvening": "Good Evening",
+    "doctorOverview": "Here's an overview of your patients today.",
+    "patientFeeling": "How are you feeling during your recovery today?"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "patients": "Patients",
+    "alerts": "Alerts",
+    "settings": "Settings",
+    "logout": "Logout",
+    "home": "Home",
+    "checklist": "Checklist",
+    "medications": "Medications",
+    "diet": "Diet",
+    "chat": "AI Chat",
+    "checkIn": "Check-in",
+    "profile": "Profile",
+    "clinicianPortal": "Clinician Portal",
+    "chiefOncologist": "Chief Oncologist",
+    "searchPlaceholder": "Search patients, records, or alerts..."
+  },
+  "status": {
+    "RECOVERING": "Recovering",
+    "AT_RISK": "At Risk",
+    "PRE_OP": "Pre-Op",
+    "RECOVERED": "Recovered"
+  },
+  "severity": {
+    "CRITICAL": "Critical",
+    "WARNING": "Warning",
+    "INFO": "Info",
+    "RESOLVED": "Resolved"
+  },
+  "alertTypes": {
+    "HIGH_TEMPERATURE": "Elevated Temperature Alert",
+    "HIGH_PAIN": "Pain Level Escalation",
+    "MISSED_MEDICATION": "Missed Medication Dose",
+    "default": "Alert"
+  },
+  "auth": {
+    "tabs": {
+      "clinician": "Clinician",
+      "patient": "Patient"
+    },
+    "doctor": {
+      "title": "Clinician Login",
+      "subtitle": "Please enter your credentials to access the portal.",
+      "emailLabel": "PROFESSIONAL EMAIL",
+      "emailPlaceholder": "name@hospital.ai",
+      "passwordLabel": "PASSWORD",
+      "forgot": "Forgot?",
+      "keepLoggedIn": "Keep me logged in for this session",
+      "signIn": "Secure Login",
+      "signingIn": "Signing in...",
+      "needAccess": "Need access?",
+      "contactAdmin": "Contact System Administrator",
+      "invalidCredentials": "Invalid credentials. Try amir@hospital.ai / password",
+      "welcomeBack": "Welcome back, Dr. {{name}}",
+      "heroTitle": "Intelligent insights for elite care.",
+      "heroSubtitle": "The next-generation clinician portal designed for high-stakes medical reliability and surgical precision. Access patient records, AI diagnostics, and hospital analytics in one secure interface.",
+      "feature1": "HIPAA Compliant Data Architecture",
+      "feature2": "Real-time Diagnostic Suggestions",
+      "privacy": "Privacy Policy",
+      "security": "Security Standards",
+      "areYouPatient": "Are you a patient?",
+      "patientLogin": "Patient login"
+    },
+    "patient": {
+      "title": "Secure Access",
+      "subtitle": "Enter the unique access code provided during your last clinician visit.",
+      "heroTitle": "Your health portal awaits.",
+      "heroSubtitle": "A patient-centered recovery interface with secure access to your health records, care plan, and AI-assisted recovery guidance.",
+      "verification": "PATIENT VERIFICATION",
+      "unlock": "Unlock Portal",
+      "invalidCode": "Invalid code — try 1234",
+      "welcomeBack": "Welcome back, {{name}}!",
+      "lostCode": "Lost your code?",
+      "contactSupport": "Contact Support",
+      "poweredBy": "Powered by Hospital AI Clinical Precision Systems"
+    }
+  },
+  "doctor": {
+    "dashboard": {
+      "stats": {
+        "totalPatients": "TOTAL PATIENTS",
+        "atRisk": "AT RISK",
+        "recovering": "RECOVERING",
+        "unreadAlerts": "UNREAD ALERTS",
+        "actionRequired": "Action Required",
+        "steadyRise": "Steady Rise",
+        "highPriority": "High Priority"
+      },
+      "recentPatients": "Recent Patients",
+      "viewAllPatients": "View All Patients",
+      "columns": {
+        "name": "PATIENT NAME",
+        "status": "STATUS",
+        "lastCheckIn": "LAST CHECK-IN",
+        "vitals": "VITALS",
+        "actions": "ACTIONS"
+      },
+      "reviewCase": "Review Case",
+      "recoveryAnalytics": "Recovery Analytics",
+      "forecastedTrend": "Forecasted Trend",
+      "aiAdvisor": "AI Clinical Advisor",
+      "smartAlert": "SMART ALERT",
+      "optimization": "OPTIMIZATION",
+      "viewAiInsights": "View AI Insights",
+      "checkInSource": {
+        "wearable": "via Wearable AI",
+        "clinic": "In-clinic visit",
+        "mobile": "Mobile sync"
+      }
+    },
+    "patients": {
+      "title": "Patient Directory",
+      "subtitle": "Manage recovery progress and surgical cohorts.",
+      "newPatient": "New Patient",
+      "noMatch": "No patients match \"{{query}}\"",
+      "columns": {
+        "patient": "PATIENT",
+        "surgery": "SURGERY TYPE",
+        "status": "STATUS",
+        "painScore": "PAIN SCORE",
+        "actions": "ACTIONS"
+      },
+      "surgeryTomorrow": "Surgery Tomorrow",
+      "postOpDay": "Post-Op Day {{day}}",
+      "age": "Age",
+      "showingCount": "Showing {{shown}} of {{total}} patients",
+      "criticalAlerts": "Critical Alerts",
+      "patientsRequireAttention_one": "{{count}} patient requires immediate attention.",
+      "patientsRequireAttention_other": "{{count}} patients require immediate attention.",
+      "highPainReported": "High pain score ({{score}}/10) reported 15m ago.",
+      "viewAllAlerts": "View All Alerts",
+      "recoveryAnalytics": "Recovery Analytics",
+      "activityScore": "Patient Activity Score (Avg)"
+    },
+    "patientDetail": {
+      "breadcrumb": "Patients",
+      "caseId": "Case #PT-{{id}}",
+      "notFound": "Patient not found.",
+      "editProfile": "Edit Profile",
+      "exportDossier": "Export Dossier",
+      "recoveryProgress": "Recovery Progress",
+      "dayOfTotal": "{{day}} of {{total}}",
+      "onTrack": "+ ON TRACK",
+      "estimatedCompletion": "Estimated Completion: {{date}}",
+      "metrics": {
+        "mobility": "MOBILITY",
+        "adherence": "ADHERENCE",
+        "painAvg": "PAIN AVG"
+      },
+      "painTrend": "Pain Level Trend",
+      "painTrendSubtitle": "Self-reported daily scores (7-day window)",
+      "recentHistory": "Recent History",
+      "viewAllActivities": "View All Activities",
+      "carePlanStrategy": "Care Plan Strategy",
+      "activeMedications": "Active Medications",
+      "modifyRx": "+ Modify Rx",
+      "physicalTherapy": "Physical Therapy",
+      "aiNotes": "AI Clinician Notes",
+      "activeResistanceL3": "Active Resistance Level 3",
+      "acceptAi": "Accept AI Adjustments"
+    },
+    "alerts": {
+      "title": "Alerts Center",
+      "subtitle": "Real-time patient monitoring and critical diagnostic updates.",
+      "markAllRead": "Mark all read",
+      "markRead": "Mark Read",
+      "active": "ACTIVE",
+      "dismissed": "DISMISSED",
+      "allClear": "All clear",
+      "noAlerts": "No alerts at this time",
+      "summary": {
+        "critical": "Critical",
+        "warning": "Warning",
+        "info": "Info",
+        "resolved": "Resolved"
+      },
+      "actions": {
+        "emergencyResponse": "Emergency Response",
+        "viewLabs": "View Labs",
+        "reviewDocument": "Review Document"
+      },
+      "predictive": "PREDICTIVE INSIGHTS",
+      "priorityRisk": "PRIORITY RISK",
+      "sepsisTitle": "Sepsis Onset Prediction",
+      "sepsisBody": "Based on biometric trending from the last 12 hours, Patient 882 (V. Thorne) has a 78% probability of sepsis onset within 4 hours. Early intervention bundle recommended.",
+      "initiateBundle": "Initiate Bundle",
+      "resourceAlert": "RESOURCE ALERT",
+      "resourceTitle": "Resource Alert",
+      "resourceBody": "ICU bed availability predicted to reach 100% capacity by 22:00. Review step-down candidates.",
+      "currentLoad": "Current Load"
+    }
+  },
+  "patient": {
+    "profile": {
+      "verifiedPatient": "VERIFIED PATIENT",
+      "recoveryProgress": "RECOVERY PROGRESS",
+      "dayOf": "Day {{day}} / {{total}}",
+      "percentComplete": "{{pct}}% complete",
+      "surgery": "Surgery",
+      "surgeryDate": "Surgery Date",
+      "accessCode": "Access Code",
+      "email": "Email",
+      "phone": "Phone",
+      "contactSupport": "Contact Support"
+    },
+    "home": {
+      "recoveryPhase1": "Recovery Phase 1",
+      "recoveryPhase2": "Recovery Phase 2",
+      "recoveryPhase3": "Recovery Phase 3",
+      "fullRecovery": "Full Recovery",
+      "phaseProgress": "{{pct}}% of your recovery journey reached.",
+      "dailyCheckIn": "Daily Check-in",
+      "todaysSchedule": "Today's Schedule",
+      "noTasks": "No tasks for today",
+      "weeklyVitality": "Weekly Vitality",
+      "pain": "PAIN",
+      "steadyProgress": "Steady Progress"
+    },
+    "checklist": {
+      "title": "Today's Checklist",
+      "progress": "{{done}} of {{total}} completed",
+      "empty": "No tasks for today",
+      "emptyHint": "Your care plan will appear here once assigned",
+      "allDone": "All done for today",
+      "allDoneHint": "Great job staying on track with your recovery."
+    },
+    "medications": {
+      "dailyProgress": "DAILY PROGRESS",
+      "title": "Your Medications",
+      "completedToday": "{{done}} of {{total}} completed today",
+      "empty": "No medications scheduled",
+      "emptyHint": "Your medication schedule will appear here",
+      "nowDue": "NOW DUE",
+      "take": "Take",
+      "category": "Category",
+      "sideEffects": "Side effects",
+      "recoveryInsight": "Recovery Insight",
+      "insightBody": "Adherence to your medication schedule is high this week. Great job maintaining consistency.",
+      "stability": "+12% Stability",
+      "hydrationAlert": "Hydration Alert",
+      "hydrationBody": "Increased fluid intake is recommended with your midday dosage to optimize absorption.",
+      "windowWarning": "Medications are only unlocked within their scheduled window. If you miss a dose, do not double-dose — contact your doctor via AI Chat."
+    },
+    "diet": {
+      "title": "Diet Guidance",
+      "subtitle": "Personalized for your recovery stage",
+      "prescribed": "PRESCRIBED",
+      "empty": "No diet prescriptions yet",
+      "emptyHint": "Your doctor will assign diet guidelines here",
+      "tipsHeading": "RECOVERY NUTRITION TIPS",
+      "tips": {
+        "protein": {
+          "title": "High Protein",
+          "desc": "Chicken, fish, eggs, legumes — aim for 1.2g/kg body weight"
+        },
+        "antiInflammatory": {
+          "title": "Anti-inflammatory",
+          "desc": "Broccoli, berries, leafy greens, turmeric"
+        },
+        "hydration": {
+          "title": "Hydration",
+          "desc": "8–10 glasses of water daily to support tissue repair"
+        },
+        "avoid": {
+          "title": "Avoid",
+          "desc": "Alcohol, processed foods, excess sodium"
+        }
+      }
+    },
+    "chat": {
+      "title": "AI Health Guide",
+      "secureActive": "SECURE AI ACTIVE",
+      "placeholder": "Type your health query...",
+      "aiAssistant": "AI Assistant",
+      "you": "You",
+      "quickChips": {
+        "logPain": "Log Pain Level",
+        "checkMeds": "Check Med Schedule",
+        "talk": "Talk"
+      },
+      "initialMessage": "Good morning. I have reviewed your latest recovery metrics from your wearable device. Your mobility levels are improving steadily. How are you feeling today?",
+      "replies": {
+        "pain": "Some pain after surgery is normal. On a 1–10 scale, pain of 3–4 is expected in early recovery. If it's above 7 or sudden/severe, contact your doctor immediately. Are you taking your Ibuprofen as scheduled?",
+        "fever": "A temperature above 38°C (100.4°F) may indicate infection and needs prompt attention. Please contact your doctor today. In the meantime, stay hydrated and rest.",
+        "medication": "Your current medications are Ibuprofen 400mg — morning (8:00) and evening (20:00). Always take with food.",
+        "exercise": "Mild morning stiffness is expected during the second week of recovery. Gentle ankle pumps every hour and short walks with crutches are recommended.",
+        "default": "I understand your concern. For your specific situation, I'd recommend consulting your care plan or contacting your doctor directly. Is there anything specific about your recovery I can help with?"
+      }
+    },
+    "checkIn": {
+      "title": "Daily Check-in",
+      "greeting": "Good morning, {{name}}.",
+      "currentMood": "Current Mood",
+      "painLevel": "Pain Level",
+      "painNone": "None",
+      "painSevere": "Severe",
+      "bodyTemperature": "Body Temperature",
+      "symptomsToday": "Symptoms Today",
+      "additionalNotes": "Additional notes",
+      "notesPlaceholder": "Anything else your doctor should know...",
+      "submit": "Submit Daily Report",
+      "encrypted": "Reported data is encrypted and shared only with your medical team.",
+      "aiHealthGuide": "AI Health Guide",
+      "completeHeading": "Recorded",
+      "completeBanner": "CHECK-IN COMPLETE · RISK: {{risk}}",
+      "todaysVitals": "TODAY'S VITALS",
+      "vitals": {
+        "pain": "Pain",
+        "temp": "Temp",
+        "symptoms": "Symptoms"
+      },
+      "messages": {
+        "high": "Your doctor has been notified about your elevated symptoms.",
+        "medium": "Your recovery is being monitored. Keep following your care plan.",
+        "low": "Great progress. Keep following your recovery plan."
+      },
+      "aiInsight": {
+        "low": "Your pain level is trending downward over the last 3 days. Keep following your prescribed light movement routine.",
+        "medium": "Moderate discomfort detected. Ensure you're taking medications on schedule and resting adequately.",
+        "high": "Your pain level is elevated. Consider contacting your doctor if this persists beyond today."
+      },
+      "backToHome": "Back to Home"
+    },
+    "report": {
+      "title": "Anonymous Report",
+      "subtitle": "Your identity will not be shared with staff.",
+      "anonymous": "ANONYMOUS & CONFIDENTIAL",
+      "categoryLabel": "What is this about?",
+      "categories": {
+        "doctor": "Doctor",
+        "nurse": "Nurse",
+        "service": "Service",
+        "facility": "Facility",
+        "medication": "Medication",
+        "other": "Other"
+      },
+      "detailsLabel": "Describe the issue",
+      "detailsPlaceholder": "Please describe what happened in as much detail as possible...",
+      "urgencyLabel": "Urgency",
+      "urgency": { "low": "Low", "medium": "Medium", "high": "High" },
+      "submit": "Submit Report",
+      "successTitle": "Report Submitted",
+      "successBody": "Thank you. Your anonymous report has been received and will be reviewed by hospital management within 24 hours.",
+      "backToProfile": "Back to Profile",
+      "reportIssue": "Report an Issue"
+    }
+  },
+  "settings": {
+    "saved": "Settings saved",
+    "save": "Save Changes",
+    "pushNotifications": "Push notifications",
+    "pushNotificationsDesc": "Critical alerts and patient updates",
+    "darkMode": "Dark mode",
+    "comingSoon": "Coming soon",
+    "securityNote": "Session is encrypted and bound to your clinician account. Sign out from any device to revoke."
+  },
+  "mood": {
+    "low": "Low",
+    "neutral": "Neutral",
+    "good": "Good",
+    "great": "Great",
+    "strong": "Strong"
+  },
+  "symptoms": {
+    "Fatigue": "Fatigue",
+    "Dizziness": "Dizziness",
+    "Nausea": "Nausea",
+    "Headache": "Headache",
+    "Insomnia": "Insomnia",
+    "Cough": "Cough",
+    "Chills": "Chills",
+    "Swelling": "Swelling"
+  }
+}

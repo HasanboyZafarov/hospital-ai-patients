@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+:root {
+  --navy: #0A1628;
+  --navy-800: #0F2040;
+  --navy-700: #162B52;
+  --navy-600: #1E3A6E;
+  --teal: #0EA5E9;
+  --teal-light: #E0F2FE;
+  --teal-dim: rgba(14, 165, 233, 0.12);
+  --surface: #F4F7FB;
+  --surface-card: #FFFFFF;
+  --text-primary: #0A1628;
+  --text-secondary: #5B7194;
+  --text-muted: #9DB0C8;
+  --border: #E4EBF5;
+  --danger: #E53E3E;
+  --warning: #D97706;
+  --success: #059669;
+  --font-sans: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: var(--font-sans);
+  --font-body: var(--font-sans);
+}
+
+* { box-sizing: border-box; }
+
+html, body, #root {
+  font-family: var(--font-sans);
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--surface);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6,
+button, input, textarea, select {
+  font-family: var(--font-sans);
+}
+
+.Toastify__toast {
+  font-family: var(--font-body) !important;
+  border-radius: 12px !important;
+  font-size: 14px !important;
+  box-shadow: 0 8px 32px rgba(10,22,40,0.15) !important;
+}
+.Toastify__toast--success {
+  background: var(--navy) !important;
+  color: white !important;
+}
+.Toastify__toast-icon svg { fill: var(--teal) !important; }
+.Toastify__progress-bar--success { background: var(--teal) !important; }
