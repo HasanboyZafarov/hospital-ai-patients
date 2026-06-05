@@ -76,7 +76,7 @@ export default function CheckInPage() {
           <button onClick={() => navigate(-1)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}><ChevronLeft size={20} style={{ color: "var(--text-secondary)" }} /></button>
           <h1 className="font-bold text-base" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>{t("patient.checkIn.title")}</h1>
         </div>
-        <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: "var(--navy)", color: "var(--teal)", fontFamily: "var(--font-display)" }}>
+        <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: "var(--navy)", color: "#0EA5E9", fontFamily: "var(--font-display)" }}>
           {(patient?.user.fullName.split(" ").map((n) => n[0]).join("").slice(0, 2) ?? "P").toUpperCase()}
         </div>
       </div>

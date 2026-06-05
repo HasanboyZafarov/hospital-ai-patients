@@ -3,7 +3,7 @@ import { usePatientAuth } from "../../stores/patientAuth";
 import { useLangStore } from "../../stores/langStore";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "../../components/LanguageSwitcher";
-import { User, Calendar, Stethoscope, KeyRound, Phone, Mail, LogOut, ShieldCheck, ChevronRight, Flag } from "lucide-react";
+import { User, Calendar, Stethoscope, KeyRound, Phone, Mail, LogOut, ShieldCheck, ChevronRight } from "lucide-react";
 
 export default function ProfilePage() {
   const navigate = useNavigate();
@@ -36,7 +36,7 @@ export default function ProfilePage() {
   return (
     <div className="p-4 pb-8" style={{ background: "var(--surface)" }}>
       <div className="flex flex-col items-center pt-4 pb-6">
-        <div className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mb-3" style={{ background: "var(--navy)", color: "var(--teal)", fontFamily: "var(--font-display)", border: "2.5px solid rgba(14,165,233,0.3)" }}>
+        <div className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mb-3" style={{ background: "var(--navy)", color: "#0EA5E9", fontFamily: "var(--font-display)", border: "2.5px solid rgba(14,165,233,0.3)" }}>
           {initials}
         </div>
         <h1 className="text-xl font-bold" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>{patient.user.fullName}</h1>
@@ -48,11 +48,11 @@ export default function ProfilePage() {
 
       <div className="rounded-2xl p-4 mb-4" style={{ background: "var(--navy)" }}>
         <div className="flex items-center justify-between mb-2">
-          <p className="text-xs font-semibold" style={{ color: "var(--teal)", fontFamily: "var(--font-display)" }}>{t("patient.profile.recoveryProgress")}</p>
+          <p className="text-xs font-semibold" style={{ color: "#0EA5E9", fontFamily: "var(--font-display)" }}>{t("patient.profile.recoveryProgress")}</p>
           <span className="text-xs font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{t("patient.profile.dayOf", { day: dayOffset, total: totalDays })}</span>
         </div>
         <div className="h-1.5 rounded-full mb-2" style={{ background: "rgba(255,255,255,0.1)" }}>
-          <div className="h-1.5 rounded-full" style={{ width: `${pct}%`, background: "linear-gradient(90deg, var(--teal), #38BDF8)" }} />
+          <div className="h-1.5 rounded-full" style={{ width: `${pct}%`, background: "linear-gradient(90deg, #0EA5E9, #38BDF8)" }} />
         </div>
         <p className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>{t("patient.profile.percentComplete", { pct })}</p>
       </div>
@@ -80,11 +80,6 @@ export default function ProfilePage() {
         <button className="w-full flex items-center gap-3 px-4 py-3.5" style={{ background: "none", border: "none", cursor: "pointer" }}>
           <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "var(--teal-dim)" }}><User size={15} style={{ color: "var(--teal)" }} /></div>
           <span className="flex-1 text-sm font-medium text-left" style={{ color: "var(--text-primary)", fontFamily: "var(--font-display)" }}>{t("patient.profile.contactSupport")}</span>
-          <ChevronRight size={16} style={{ color: "var(--text-muted)" }} />
-        </button>
-        <button onClick={() => navigate("/report")} className="w-full flex items-center gap-3 px-4 py-3.5" style={{ background: "none", border: "none", cursor: "pointer", borderTop: "1px solid var(--border)" }}>
-          <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "rgba(229,62,62,0.07)" }}><Flag size={15} style={{ color: "var(--danger)" }} /></div>
-          <span className="flex-1 text-sm font-medium text-left" style={{ color: "var(--text-primary)", fontFamily: "var(--font-display)" }}>{t("patient.report.reportIssue")}</span>
           <ChevronRight size={16} style={{ color: "var(--text-muted)" }} />
         </button>
       </div>

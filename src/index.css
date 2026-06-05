@@ -6,7 +6,7 @@
   --navy-800: #0F2040;
   --navy-700: #162B52;
   --navy-600: #1E3A6E;
-  --teal: #0EA5E9;
+  --teal: #0A1628;
   --teal-light: #E0F2FE;
   --teal-dim: rgba(14, 165, 233, 0.12);
   --surface: #F4F7FB;
@@ -24,6 +24,36 @@
 }
 
 * { box-sizing: border-box; }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--teal) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0EA5E9, #0284C7);
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--navy-600);
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
 
 html, body, #root {
   font-family: var(--font-sans);

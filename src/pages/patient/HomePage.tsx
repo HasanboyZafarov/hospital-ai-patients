@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   CheckCircle, ChevronRight, Pill, Activity, ClipboardCheck,
-  Salad, Ban, Calendar, TrendingUp,
+  Salad, Ban, Calendar, TrendingUp, Flag,
 } from "lucide-react";
 
 const typeIcon: Record<string, React.ElementType> = {
@@ -76,7 +76,7 @@ export default function PatientHomePage() {
         </div>
         <div
           className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-1"
-          style={{ background: "var(--navy)", color: "var(--teal)", fontFamily: "var(--font-display)", border: "2px solid rgba(14,165,233,0.25)" }}
+          style={{ background: "var(--navy)", color: "#0EA5E9", fontFamily: "var(--font-display)", border: "2px solid rgba(14,165,233,0.25)" }}
         >
           {initials}
         </div>
@@ -92,10 +92,10 @@ export default function PatientHomePage() {
             <span className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>{t("common.days")}</span>
           </div>
           <div className="flex-1 min-w-0">
-            <p className="font-semibold" style={{ color: "var(--teal)", fontFamily: "var(--font-display)", fontSize: "15px" }}>{recoveryPhase}</p>
+            <p className="font-semibold" style={{ color: "#0EA5E9", fontFamily: "var(--font-display)", fontSize: "15px" }}>{recoveryPhase}</p>
             <p className="text-xs mt-0.5 leading-snug" style={{ color: "rgba(255,255,255,0.5)" }}>{t("patient.home.phaseProgress", { pct: phasePct })}</p>
             <div className="mt-2 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.1)" }}>
-              <div className="h-1 rounded-full" style={{ width: `${phasePct}%`, background: "linear-gradient(90deg, var(--teal), #38BDF8)" }} />
+              <div className="h-1 rounded-full" style={{ width: `${phasePct}%`, background: "linear-gradient(90deg, #0EA5E9, #38BDF8)" }} />
             </div>
           </div>
         </div>
@@ -103,10 +103,24 @@ export default function PatientHomePage() {
         <button
           onClick={() => navigate("/checkin")}
           className="w-full flex items-center justify-center gap-2.5 font-semibold transition-all duration-150"
-          style={{ height: "52px", borderRadius: "16px", background: "linear-gradient(135deg, var(--teal) 0%, #38BDF8 100%)", color: "white", fontFamily: "var(--font-display)", fontSize: "15px", border: "none", cursor: "pointer" }}
+          style={{ height: "52px", borderRadius: "16px", background: "linear-gradient(135deg, #0EA5E9 0%, #38BDF8 100%)", color: "white", fontFamily: "var(--font-display)", fontSize: "15px", border: "none", cursor: "pointer" }}
         >
           <CheckCircle size={20} />
           {t("patient.home.dailyCheckIn")}
+        </button>
+
+        <button
+          onClick={() => navigate("/report")}
+          className="w-full flex items-center gap-3 px-4 py-3 rounded-2xl transition-opacity duration-150 active:opacity-70"
+          style={{ background: "var(--surface-card)", border: "1px solid var(--border)", cursor: "pointer" }}
+        >
+          <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "rgba(229,62,62,0.08)" }}>
+            <Flag size={16} style={{ color: "var(--danger)" }} />
+          </div>
+          <span className="flex-1 text-sm font-semibold text-left" style={{ color: "var(--text-primary)", fontFamily: "var(--font-display)" }}>
+            {t("patient.report.reportIssue")}
+          </span>
+          <ChevronRight size={16} style={{ color: "var(--text-muted)", flexShrink: 0 }} />
         </button>
 
         <div>

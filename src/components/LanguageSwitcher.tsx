@@ -16,11 +16,12 @@ export function LanguageSwitcher({ variant = "dark" }: Props) {
 
   return (
     <div
-      className="flex rounded-lg overflow-hidden w-full"
+      className="flex w-full gap-1"
       style={{
-        border: isDark ? "1px solid rgba(255,255,255,0.1)" : "1px solid var(--border)",
-        background: isDark ? "rgba(255,255,255,0.04)" : "var(--surface)",
-        justifyContent: "space-between",
+        padding: "4px",
+        borderRadius: "12px",
+        background: isDark ? "rgba(255,255,255,0.06)" : "var(--surface)",
+        border: isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid var(--border)",
       }}
     >
       {LANGS.map(({ code, label }) => {
@@ -29,19 +30,21 @@ export function LanguageSwitcher({ variant = "dark" }: Props) {
           <button
             key={code}
             onClick={() => setLang(code)}
-            className="text-xs font-semibold transition-all duration-150"
+            className="flex-1 text-xs font-semibold transition-all duration-200"
             style={{
-              padding: "6px 12px",
+              padding: "8px 0",
+              borderRadius: "8px",
               border: "none",
               cursor: "pointer",
               fontFamily: "var(--font-display)",
+              letterSpacing: "0.05em",
               background: isActive
-                ? isDark ? "rgba(14,165,233,0.2)" : "var(--teal)"
+                ? isDark ? "#0EA5E9" : "var(--surface-card)"
                 : "transparent",
               color: isActive
-                ? isDark ? "var(--teal)" : "white"
-                : isDark ? "rgba(255,255,255,0.3)" : "var(--text-muted)",
-              borderRight: "none",
+                ? isDark ? "white" : "var(--navy)"
+                : isDark ? "rgba(255,255,255,0.45)" : "var(--text-muted)",
+              boxShadow: isActive && !isDark ? "0 1px 3px rgba(10,22,40,0.08), 0 0 0 1px var(--border)" : "none",
             }}
           >
             {label}

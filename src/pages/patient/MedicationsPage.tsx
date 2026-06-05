@@ -53,7 +53,7 @@ export default function MedicationsPage() {
         <div className="flex items-center gap-3">
           <button style={{ background: "none", border: "none", padding: 0, cursor: "pointer", display: "flex" }}><HelpCircle size={20} style={{ color: "var(--text-muted)" }} /></button>
           <button style={{ background: "none", border: "none", padding: 0, cursor: "pointer", display: "flex" }}><Bell size={20} style={{ color: "var(--text-muted)" }} /></button>
-          <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: "var(--navy)", color: "var(--teal)", fontFamily: "var(--font-display)" }}>{initials}</div>
+          <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: "var(--navy)", color: "#0EA5E9", fontFamily: "var(--font-display)" }}>{initials}</div>
         </div>
       </div>
 

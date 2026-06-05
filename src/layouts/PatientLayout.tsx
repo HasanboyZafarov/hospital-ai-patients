@@ -1,9 +1,16 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useEffect, useRef } from "react";
 import { Home, Calendar, Pill, MessageCircle, UserCircle } from "lucide-react";
 
 export function PatientLayout() {
   const { t } = useTranslation();
+  const { pathname } = useLocation();
+  const mainRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    mainRef.current?.scrollTo({ top: 0, left: 0, behavior: "instant" as ScrollBehavior });
+  }, [pathname]);
 
   const nav = [
     { to: "/",            icon: Home,          label: t("nav.home") },
@@ -19,7 +26,7 @@ export function PatientLayout() {
         className="w-full max-w-sm flex flex-col"
         style={{ background: "var(--surface)", height: "100dvh" }}
       >
-        <main className="flex-1 overflow-y-auto overflow-x-hidden min-h-0">
+        <main ref={mainRef} className="flex-1 overflow-y-auto overflow-x-hidden min-h-0">
           <Outlet />
         </main>
 
