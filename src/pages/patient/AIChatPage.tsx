@@ -2,6 +2,8 @@ import { useState, useRef, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ArrowLeft, MoreVertical, Send, Bot } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { streamChat, useChatHistory } from "../../api/hooks";
 
 interface Message {
@@ -124,7 +126,7 @@ export default function AIChatPage() {
       <div className="flex-1 overflow-auto px-4 py-4 space-y-4 min-h-0">
         {messages.map((msg, i) => (
           <div key={i} className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}>
-            <div className="max-w-[82%] px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap"
+            <div className={`max-w-[82%] px-4 py-3 text-sm leading-relaxed ${msg.role === "assistant" ? "chat-md" : "chat-md chat-md--user"}`}
               style={{
                 background: msg.role === "assistant" ? "var(--surface-card)" : "#144EED",
                 border: msg.role === "assistant" ? "1px solid var(--border)" : "none",
@@ -132,7 +134,9 @@ export default function AIChatPage() {
                 borderRadius: msg.role === "assistant" ? "4px 16px 16px 16px" : "16px 4px 16px 16px",
                 fontFamily: "var(--font-body)",
               }}>
-              {msg.content || (loading && i === messages.length - 1 ? "…" : "")}
+              {msg.content
+                ? <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
+                : (loading && i === messages.length - 1 ? "…" : "")}
             </div>
             <p className="text-xs mt-1 flex items-center gap-1" style={{ color: "var(--text-muted)" }}>
               {formatTime(msg.timestamp)} · {msg.role === "assistant" ? (<span className="flex items-center gap-1"><Bot size={11} /> {t("patient.chat.aiAssistant")}</span>) : t("patient.chat.you")}

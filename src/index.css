@@ -217,6 +217,37 @@ button, input, textarea, select {
 .badge-warning   { background: #FFFBEB; color: #D97706; border-color: #FDE68A; }
 .badge-success   { background: #DCFCE7; color: #16A34A; border-color: #BBF7D0; }
 
+/* Chat markdown */
+.chat-md > * { margin: 0; }
+.chat-md > * + * { margin-top: 8px; }
+.chat-md strong { font-weight: 700; }
+.chat-md em { font-style: italic; }
+.chat-md p { line-height: 1.55; }
+.chat-md ul,
+.chat-md ol {
+  padding-left: 18px;
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.chat-md ul { list-style: disc; }
+.chat-md ol { list-style: decimal; }
+.chat-md li { line-height: 1.5; }
+.chat-md li::marker { color: #144EED; }
+.chat-md code {
+  background: var(--bg-app);
+  padding: 1px 6px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.chat-md a { color: #144EED; text-decoration: underline; }
+.chat-md--user strong { color: white; }
+.chat-md--user code { background: rgba(255,255,255,0.18); color: white; }
+.chat-md--user li::marker { color: rgba(255,255,255,0.8); }
+.chat-md--user a { color: white; }
+
 /* Toast theme */
 .Toastify__toast {
   font-family: var(--font-sans) !important;
