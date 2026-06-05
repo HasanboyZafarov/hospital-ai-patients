@@ -1,15 +1,19 @@
-import { mockCarePlan, mockCheckIns } from "../../mocks/data";
-import { usePatientAuth } from "../../stores/patientAuth";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
   CheckCircle, ChevronRight, Pill, Activity, ClipboardCheck,
   Salad, Ban, Calendar, TrendingUp, Flag,
 } from "lucide-react";
+import { usePatientAuth } from "../../stores/patientAuth";
+import { useDashboard } from "../../api/hooks";
+import type { CareItemType } from "../../api/hooks";
+import { Skeleton } from "../../components/Skeleton";
+import { ErrorState } from "../../components/ErrorState";
 
-const typeIcon: Record<string, React.ElementType> = {
+const typeIcon: Record<CareItemType, React.ElementType> = {
   MEDICATION: Pill,
   ACTIVITY: Activity,
+  EXERCISE: Activity,
   DIET: Salad,
   RESTRICTION: Ban,
   CHECKUP: ClipboardCheck,
@@ -29,41 +33,87 @@ function Sparkline({ data }: { data: number[] }) {
     .join(" ");
   return (
     <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{ overflow: "visible" }}>
-      <polyline points={pts} fill="none" stroke="var(--teal)" strokeWidth="2.5"
+      <polyline points={pts} fill="none" stroke="#0EA5E9" strokeWidth="2.5"
         strokeLinejoin="round" strokeLinecap="round" />
     </svg>
   );
 }
 
+function HomeSkeleton() {
+  return (
+    <div className="min-h-full" style={{ background: "var(--surface)" }}>
+      <div className="px-5 pt-8 pb-1 flex items-start justify-between">
+        <div className="flex flex-col gap-2">
+          <Skeleton width={90} height={11} />
+          <Skeleton width={180} height={22} />
+        </div>
+        <Skeleton width={40} height={40} radius={999} />
+      </div>
+      <div className="px-4 pt-4 pb-6 space-y-4">
+        <div className="rounded-2xl p-4 flex items-center gap-4" style={{ background: "var(--navy)" }}>
+          <Skeleton width={60} height={60} radius={999} dark />
+          <div className="flex-1 flex flex-col gap-2">
+            <Skeleton width="60%" height={14} dark />
+            <Skeleton width="40%" height={10} dark />
+            <Skeleton width="100%" height={4} radius={999} dark />
+          </div>
+        </div>
+        <Skeleton width="100%" height={52} radius={16} />
+        <Skeleton width="100%" height={56} radius={16} />
+        <div>
+          <div className="flex items-center justify-between mb-3">
+            <Skeleton width={140} height={16} />
+            <Skeleton width={50} height={12} />
+          </div>
+          <div className="space-y-2">
+            {[0, 1, 2].map((i) => (
+              <div key={i} className="flex items-center gap-3 rounded-2xl" style={{ background: "var(--surface-card)", border: "1px solid var(--border)", padding: "12px 14px" }}>
+                <Skeleton width={36} height={36} radius={12} />
+                <div className="flex-1 flex flex-col gap-1.5">
+                  <Skeleton width="70%" height={13} />
+                  <Skeleton width="50%" height={10} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="rounded-2xl p-4 flex flex-col gap-3" style={{ background: "var(--surface-card)", border: "1px solid var(--border)" }}>
+          <Skeleton width={150} height={15} />
+          <div className="flex items-center gap-3">
+            <Skeleton width={70} height={36} />
+            <Skeleton width={110} height={32} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function PatientHomePage() {
   const navigate = useNavigate();
-  const { patient } = usePatientAuth();
+  const { fullName } = usePatientAuth();
   const { t } = useTranslation();
+  const { data, isLoading, isError, refetch } = useDashboard();
 
-  if (!patient) {
-    return (
-      <div className="flex items-center justify-center" style={{ minHeight: "60vh" }}>
-        <p className="text-sm" style={{ color: "var(--text-muted)" }}>{t("common.loading")}</p>
-      </div>
-    );
-  }
+  if (isLoading) return <HomeSkeleton />;
+  if (isError || !data) return <ErrorState onRetry={() => refetch()} />;
 
   const h = new Date().getHours();
   const greeting = h < 12 ? t("greetings.goodMorning") : h < 17 ? t("greetings.goodAfternoon") : t("greetings.goodEvening");
 
-  const dayOffset = Math.max(0, Math.floor((Date.now() - new Date(patient.surgeryDate).getTime()) / 86400000));
+  const displayName = data.patient.fullName || fullName || "";
+  const initials = displayName.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
+
+  const { postOpDay, progressPct } = data.recovery;
   const recoveryPhase =
-    dayOffset < 7 ? t("patient.home.recoveryPhase1") :
-    dayOffset < 21 ? t("patient.home.recoveryPhase2") :
-    dayOffset < 60 ? t("patient.home.recoveryPhase3") :
+    postOpDay < 7 ? t("patient.home.recoveryPhase1") :
+    postOpDay < 21 ? t("patient.home.recoveryPhase2") :
+    postOpDay < 60 ? t("patient.home.recoveryPhase3") :
     t("patient.home.fullRecovery");
 
-  const totalDays = patient.surgeryType.avgRecoveryDays;
-  const phasePct = Math.min(100, Math.round((dayOffset / totalDays) * 100));
-  const todayItems = mockCarePlan.items.filter((i) => i.dayOffset === 0);
-  const initials = patient.user.fullName.split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
-  const painTrend = [...mockCheckIns].reverse().map((c) => c.painLevel);
-  const latestPain = mockCheckIns[0]?.painLevel ?? null;
+  const todayItems = data.todaySchedule ?? [];
+  const painTrend = (data.weeklyVitality?.painTrend ?? []).map((p) => p.pain);
+  const latestPain = data.weeklyVitality?.latestPain ?? null;
 
   return (
     <div className="min-h-full" style={{ background: "var(--surface)" }}>
@@ -71,7 +121,7 @@ export default function PatientHomePage() {
         <div>
           <p className="text-xs" style={{ color: "var(--text-muted)", fontFamily: "var(--font-body)" }}>{greeting},</p>
           <h1 className="text-2xl font-bold mt-0.5" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>
-            {patient.user.fullName}
+            {displayName}
           </h1>
         </div>
         <div
@@ -88,14 +138,14 @@ export default function PatientHomePage() {
             className="w-[60px] h-[60px] rounded-full flex flex-col items-center justify-center flex-shrink-0"
             style={{ background: "rgba(255,255,255,0.08)", border: "1.5px solid rgba(255,255,255,0.12)" }}
           >
-            <span className="text-xl font-bold text-white leading-none" style={{ fontFamily: "var(--font-display)" }}>{dayOffset}</span>
+            <span className="text-xl font-bold text-white leading-none" style={{ fontFamily: "var(--font-display)" }}>{postOpDay}</span>
             <span className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>{t("common.days")}</span>
           </div>
           <div className="flex-1 min-w-0">
             <p className="font-semibold" style={{ color: "#0EA5E9", fontFamily: "var(--font-display)", fontSize: "15px" }}>{recoveryPhase}</p>
-            <p className="text-xs mt-0.5 leading-snug" style={{ color: "rgba(255,255,255,0.5)" }}>{t("patient.home.phaseProgress", { pct: phasePct })}</p>
+            <p className="text-xs mt-0.5 leading-snug" style={{ color: "rgba(255,255,255,0.5)" }}>{t("patient.home.phaseProgress", { pct: progressPct })}</p>
             <div className="mt-2 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.1)" }}>
-              <div className="h-1 rounded-full" style={{ width: `${phasePct}%`, background: "linear-gradient(90deg, #0EA5E9, #38BDF8)" }} />
+              <div className="h-1 rounded-full" style={{ width: `${progressPct}%`, background: "linear-gradient(90deg, #0EA5E9, #38BDF8)" }} />
             </div>
           </div>
         </div>
@@ -144,13 +194,13 @@ export default function PatientHomePage() {
                 const Icon = typeIcon[item.type] ?? ClipboardCheck;
                 return (
                   <div
-                    key={item.id}
+                    key={`${item.itemId}-${item.scheduleTime ?? ""}`}
                     onClick={() => navigate("/checklist")}
                     className="flex items-center gap-3 rounded-2xl transition-opacity duration-150 active:opacity-70"
                     style={{ background: "var(--surface-card)", border: "1px solid var(--border)", padding: "12px 14px", cursor: "pointer" }}
                   >
                     <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "var(--teal-dim)" }}>
-                      <Icon size={16} style={{ color: "var(--teal)" }} />
+                      <Icon size={16} style={{ color: "#0EA5E9" }} />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-semibold truncate" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>{item.title}</p>
@@ -178,8 +228,8 @@ export default function PatientHomePage() {
             </div>
             <div className="flex-1 flex flex-col items-end gap-1.5">
               <div className="flex items-center gap-1">
-                <TrendingUp size={13} style={{ color: "var(--teal)" }} />
-                <span className="text-xs font-semibold" style={{ color: "var(--teal)", fontFamily: "var(--font-display)" }}>{t("patient.home.steadyProgress")}</span>
+                <TrendingUp size={13} style={{ color: "#0EA5E9" }} />
+                <span className="text-xs font-semibold" style={{ color: "#0EA5E9", fontFamily: "var(--font-display)" }}>{t("patient.home.steadyProgress")}</span>
               </div>
               {painTrend.length > 1 && <Sparkline data={painTrend} />}
             </div>

@@ -2,6 +2,7 @@ import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useEffect, useRef } from "react";
 import { Home, Calendar, Pill, MessageCircle, UserCircle } from "lucide-react";
+import { SkeletonStyles } from "../components/Skeleton";
 
 export function PatientLayout() {
   const { t } = useTranslation();
@@ -22,6 +23,7 @@ export function PatientLayout() {
 
   return (
     <div className="flex justify-center" style={{ background: "#E8EDF4", minHeight: "100dvh" }}>
+      <SkeletonStyles />
       <div
         className="w-full max-w-sm flex flex-col"
         style={{ background: "var(--surface)", height: "100dvh" }}

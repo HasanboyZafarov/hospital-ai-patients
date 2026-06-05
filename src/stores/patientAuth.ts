@@ -1,12 +1,11 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { User, Patient } from "../types";
 
 interface PatientAuthState {
   token: string | null;
-  user: User | null;
-  patient: Patient | null;
-  setAuth: (token: string, user: User, patient: Patient) => void;
+  fullName: string | null;
+  patientId: string | null;
+  setAuth: (token: string, fullName: string, patientId: string) => void;
   logout: () => void;
 }
 
@@ -14,10 +13,10 @@ export const usePatientAuth = create<PatientAuthState>()(
   persist(
     (set) => ({
       token: null,
-      user: null,
-      patient: null,
-      setAuth: (token, user, patient) => set({ token, user, patient }),
-      logout: () => set({ token: null, user: null, patient: null }),
+      fullName: null,
+      patientId: null,
+      setAuth: (token, fullName, patientId) => set({ token, fullName, patientId }),
+      logout: () => set({ token: null, fullName: null, patientId: null }),
     }),
     { name: "patient-auth" }
   )

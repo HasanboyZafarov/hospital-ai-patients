@@ -3,22 +3,26 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ChevronLeft, Thermometer, Activity, AlertTriangle, CheckCircle2, Frown, Meh, Smile, Heart, Zap, Bot } from "lucide-react";
 import { usePatientAuth } from "../../stores/patientAuth";
+import { useCheckInMutation } from "../../api/hooks";
+import type { CheckInResult, RiskLevel } from "../../api/hooks";
+import { toast } from "react-toastify";
 
 const SYMPTOMS = ["Fatigue", "Dizziness", "Nausea", "Headache", "Insomnia", "Cough", "Chills", "Swelling"];
 const MOODS = [{ icon: Frown, value: "low" }, { icon: Meh, value: "neutral" }, { icon: Smile, value: "good" }, { icon: Heart, value: "great" }, { icon: Zap, value: "strong" }];
 
 export default function CheckInPage() {
   const navigate = useNavigate();
-  const { patient } = usePatientAuth();
+  const { fullName } = usePatientAuth();
   const { t } = useTranslation();
+  const checkIn = useCheckInMutation();
   const [painLevel, setPainLevel] = useState(3);
   const [temperature, setTemperature] = useState("36.6");
   const [symptoms, setSymptoms] = useState<string[]>([]);
   const [mood, setMood] = useState("good");
   const [notes, setNotes] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [result, setResult] = useState<CheckInResult | null>(null);
 
-  const firstName = patient?.user.fullName.split(" ")[0] ?? "there";
+  const firstName = (fullName ?? "there").split(" ")[0];
 
   function toggleSymptom(s: string) {
     setSymptoms((prev) => prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]);
@@ -26,15 +30,31 @@ export default function CheckInPage() {
 
   const aiInsight = painLevel <= 3 ? t("patient.checkIn.aiInsight.low") : painLevel <= 6 ? t("patient.checkIn.aiInsight.medium") : t("patient.checkIn.aiInsight.high");
 
-  if (submitted) {
-    const riskLevel = painLevel >= 7 || Number(temperature) >= 38 ? "HIGH" : painLevel >= 5 ? "MEDIUM" : "LOW";
+  function submit() {
+    checkIn.mutate(
+      {
+        painLevel,
+        temperature: Number(temperature),
+        symptoms,
+        mood,
+        notes: notes || undefined,
+      },
+      {
+        onSuccess: (r) => setResult(r),
+        onError: () => toast.error(t("common.errorLoading", "Failed to submit")),
+      }
+    );
+  }
+
+  if (result) {
+    const riskLevel: RiskLevel = result.risk.riskLevel;
     const isHigh = riskLevel === "HIGH";
     const isMed = riskLevel === "MEDIUM";
     const RiskIcon = isHigh ? AlertTriangle : isMed ? Activity : CheckCircle2;
     const riskColor = isHigh ? "var(--danger)" : isMed ? "var(--warning)" : "var(--success)";
     const riskBg = isHigh ? "rgba(229,62,62,0.07)" : isMed ? "rgba(217,119,6,0.07)" : "rgba(5,150,105,0.07)";
     const riskBorder = isHigh ? "rgba(229,62,62,0.2)" : isMed ? "rgba(217,119,6,0.2)" : "rgba(5,150,105,0.2)";
-    const riskMessage = isHigh ? t("patient.checkIn.messages.high") : isMed ? t("patient.checkIn.messages.medium") : t("patient.checkIn.messages.low");
+    const advice = result.risk.advice || (isHigh ? t("patient.checkIn.messages.high") : isMed ? t("patient.checkIn.messages.medium") : t("patient.checkIn.messages.low"));
 
     return (
       <div className="flex flex-col h-full" style={{ background: "var(--navy)" }}>
@@ -45,7 +65,12 @@ export default function CheckInPage() {
           <div className="text-center">
             <p className="text-xs font-bold tracking-widest mb-2" style={{ color: riskColor, fontFamily: "var(--font-display)" }}>{t("patient.checkIn.completeBanner", { risk: riskLevel })}</p>
             <h1 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: "var(--font-display)" }}>{t("patient.checkIn.completeHeading")}</h1>
-            <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.5)" }}>{riskMessage}</p>
+            <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.7)" }}>{advice}</p>
+            {result.risk.alertCreated && (
+              <p className="text-xs mt-3 font-semibold" style={{ color: riskColor, fontFamily: "var(--font-display)" }}>
+                {t("patient.checkIn.careTeamNotified", "Your care team has been notified.")}
+              </p>
+            )}
           </div>
           <div className="w-full rounded-2xl p-4" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
             <p className="text-xs font-semibold tracking-widest mb-3 text-center" style={{ color: "rgba(255,255,255,0.3)", fontFamily: "var(--font-display)" }}>{t("patient.checkIn.todaysVitals")}</p>
@@ -69,6 +94,9 @@ export default function CheckInPage() {
     );
   }
 
+  const submitting = checkIn.isPending;
+  const initials = (fullName ?? "P").split(" ").map((n) => n[0]).join("").slice(0, 2).toUpperCase();
+
   return (
     <div className="min-h-full" style={{ background: "var(--surface)" }}>
       <div className="px-5 pt-6 pb-4 flex items-center justify-between" style={{ background: "var(--surface-card)", borderBottom: "1px solid var(--border)" }}>
@@ -77,7 +105,7 @@ export default function CheckInPage() {
           <h1 className="font-bold text-base" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>{t("patient.checkIn.title")}</h1>
         </div>
         <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: "var(--navy)", color: "#0EA5E9", fontFamily: "var(--font-display)" }}>
-          {(patient?.user.fullName.split(" ").map((n) => n[0]).join("").slice(0, 2) ?? "P").toUpperCase()}
+          {initials}
         </div>
       </div>
 
@@ -95,10 +123,10 @@ export default function CheckInPage() {
               const isSelected = mood === m.value;
               return (
                 <button key={m.value} onClick={() => setMood(m.value)} className="flex flex-col items-center gap-1.5" style={{ background: "none", border: "none", cursor: "pointer" }}>
-                  <div className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-150" style={{ background: isSelected ? "var(--teal)" : "var(--surface)", border: isSelected ? "none" : "1.5px solid var(--border)" }}>
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-150" style={{ background: isSelected ? "#0EA5E9" : "var(--surface)", border: isSelected ? "none" : "1.5px solid var(--border)" }}>
                     <MoodIcon size={20} style={{ color: isSelected ? "white" : "var(--text-muted)" }} />
                   </div>
-                  <span className="text-xs font-medium" style={{ color: isSelected ? "var(--teal)" : "var(--text-muted)", fontFamily: "var(--font-body)" }}>{t(`mood.${m.value}`)}</span>
+                  <span className="text-xs font-medium" style={{ color: isSelected ? "#0EA5E9" : "var(--text-muted)", fontFamily: "var(--font-body)" }}>{t(`mood.${m.value}`)}</span>
                 </button>
               );
             })}
@@ -108,7 +136,7 @@ export default function CheckInPage() {
         <div className="rounded-2xl p-4" style={{ background: "var(--surface-card)", border: "1px solid var(--border)" }}>
           <div className="flex items-center justify-between mb-4">
             <p className="font-semibold text-sm" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>{t("patient.checkIn.painLevel")}</p>
-            <span className="text-lg font-bold" style={{ fontFamily: "var(--font-display)", color: "var(--teal)" }}>{painLevel}</span>
+            <span className="text-lg font-bold" style={{ fontFamily: "var(--font-display)", color: "#0EA5E9" }}>{painLevel}</span>
           </div>
           <div className="relative" style={{ height: "20px" }}>
             <div className="absolute top-1/2 left-0 right-0 rounded-full pointer-events-none" style={{ height: "6px", transform: "translateY(-50%)", background: "linear-gradient(to right, #22c55e 0%, #eab308 50%, #ef4444 100%)" }} />
@@ -139,7 +167,7 @@ export default function CheckInPage() {
             {SYMPTOMS.map((s) => {
               const active = symptoms.includes(s);
               return (
-                <button key={s} onClick={() => toggleSymptom(s)} className="px-3.5 py-1.5 rounded-full text-xs font-medium transition-all" style={{ background: active ? "var(--teal-dim)" : "var(--surface)", border: active ? "1.5px solid var(--teal)" : "1.5px solid var(--border)", color: active ? "var(--teal)" : "var(--text-secondary)", cursor: "pointer", fontFamily: "var(--font-body)" }}>
+                <button key={s} onClick={() => toggleSymptom(s)} className="px-3.5 py-1.5 rounded-full text-xs font-medium transition-all" style={{ background: active ? "var(--teal-dim)" : "var(--surface)", border: active ? "1.5px solid #0EA5E9" : "1.5px solid var(--border)", color: active ? "#0EA5E9" : "var(--text-secondary)", cursor: "pointer", fontFamily: "var(--font-body)" }}>
                   {t(`symptoms.${s}`, s)}
                 </button>
               );
@@ -155,8 +183,8 @@ export default function CheckInPage() {
         </div>
 
         <div>
-          <button onClick={() => setSubmitted(true)} className="w-full flex items-center justify-center gap-2 font-semibold text-sm transition-all" style={{ height: "52px", borderRadius: "14px", background: "linear-gradient(135deg, var(--teal) 0%, #38BDF8 100%)", color: "white", fontFamily: "var(--font-body)", border: "none", cursor: "pointer" }}>
-            {t("patient.checkIn.submit")} <Thermometer size={16} />
+          <button onClick={submit} disabled={submitting} className="w-full flex items-center justify-center gap-2 font-semibold text-sm transition-all" style={{ height: "52px", borderRadius: "14px", background: submitting ? "var(--border)" : "linear-gradient(135deg, #0EA5E9 0%, #38BDF8 100%)", color: submitting ? "var(--text-muted)" : "white", fontFamily: "var(--font-body)", border: "none", cursor: submitting ? "wait" : "pointer" }}>
+            {submitting ? t("common.loading") : t("patient.checkIn.submit")} {!submitting && <Thermometer size={16} />}
           </button>
           <p className="text-xs text-center mt-2 leading-relaxed" style={{ color: "var(--text-muted)" }}>{t("patient.checkIn.encrypted")}</p>
         </div>
@@ -164,7 +192,7 @@ export default function CheckInPage() {
         <div className="rounded-2xl p-4" style={{ background: "var(--navy)" }}>
           <div className="flex items-start gap-3">
             <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "rgba(14,165,233,0.2)" }}>
-              <Bot size={18} style={{ color: "var(--teal)" }} />
+              <Bot size={18} style={{ color: "#0EA5E9" }} />
             </div>
             <div>
               <p className="font-semibold text-sm text-white mb-1" style={{ fontFamily: "var(--font-display)" }}>{t("patient.checkIn.aiHealthGuide")}</p>
@@ -175,8 +203,8 @@ export default function CheckInPage() {
       </div>
 
       <style>{`
-        .pain-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--teal); border: 3px solid white; box-shadow: 0 1px 6px rgba(0,0,0,0.18); cursor: pointer; }
-        .pain-slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--teal); box-shadow: 0 1px 6px rgba(0,0,0,0.18); cursor: pointer; border: none; }
+        .pain-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #0EA5E9; border: 3px solid white; box-shadow: 0 1px 6px rgba(0,0,0,0.18); cursor: pointer; }
+        .pain-slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #0EA5E9; box-shadow: 0 1px 6px rgba(0,0,0,0.18); cursor: pointer; border: none; }
       `}</style>
     </div>
   );

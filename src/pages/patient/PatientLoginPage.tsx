@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { usePatientAuth } from "../../stores/patientAuth";
-import { mockPatients } from "../../mocks/data";
+import { usePatientLogin } from "../../api/hooks";
 import { LockKeyhole, ChevronRight } from "lucide-react";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
@@ -15,11 +15,13 @@ export default function PatientLoginPage() {
   const refs = useRef<(HTMLInputElement | null)[]>([]);
   const { setAuth } = usePatientAuth();
   const navigate = useNavigate();
+  const login = usePatientLogin();
 
   const allFilled = digits.every((d) => d !== "");
+  const loading = login.isPending;
 
   function handleInput(i: number, val: string) {
-    const v = val.replace(/[^0-9]/g, "");
+    const v = val.replace(/[^0-9a-zA-Z]/g, "");
     if (!v) {
       const next = [...digits];
       next[i] = "";
@@ -27,7 +29,7 @@ export default function PatientLoginPage() {
       return;
     }
     const next = [...digits];
-    next[i] = v[v.length - 1];
+    next[i] = v[v.length - 1].toUpperCase();
     setDigits(next);
     if (i < 3) refs.current[i + 1]?.focus();
   }
@@ -39,36 +41,48 @@ export default function PatientLoginPage() {
   }
 
   function handlePaste(e: React.ClipboardEvent) {
-    const text = e.clipboardData.getData("text").replace(/[^0-9]/g, "").slice(0, 4);
+    const text = e.clipboardData
+      .getData("text")
+      .replace(/[^0-9a-zA-Z]/g, "")
+      .slice(0, 4)
+      .toUpperCase();
     const next = Array(4).fill("");
-    text.split("").forEach((c, i) => { next[i] = c; });
+    text.split("").forEach((c, i) => {
+      next[i] = c;
+    });
     setDigits(next);
     refs.current[Math.min(text.length, 3)]?.focus();
     e.preventDefault();
   }
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!allFilled) return;
-    const code = `HOSP-${digits.join("")}`;
-    const patient = mockPatients.find((p) => p.accessCode === code);
-    if (patient) {
-      setAuth("mock-token-patient", patient.user, patient);
-      toast.success(t("auth.patient.welcomeBack", { name: patient.user.fullName.split(" ")[0] }), {
-        position: "top-center",
-        autoClose: 3000,
-      });
-      navigate("/");
-    } else {
-      setError(t("auth.patient.invalidCode"));
-      setShake(true);
-      setTimeout(() => setShake(false), 600);
-      setDigits(Array(4).fill(""));
-      setTimeout(() => refs.current[0]?.focus(), 50);
-    }
+  function failVisual(msg: string) {
+    setError(msg);
+    setShake(true);
+    setTimeout(() => setShake(false), 600);
+    setDigits(Array(4).fill(""));
+    setTimeout(() => refs.current[0]?.focus(), 50);
   }
 
-  useEffect(() => { refs.current[0]?.focus(); }, []);
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!allFilled || loading) return;
+    const code = `HOSP-${digits.join("")}`;
+    login.mutate(code, {
+      onSuccess: (d) => {
+        setAuth(d.accessToken, d.user.fullName, d.patient.id);
+        toast.success(
+          t("auth.patient.welcomeBack", { name: d.user.fullName.split(" ")[0] }),
+          { position: "top-center", autoClose: 3000 }
+        );
+        navigate("/");
+      },
+      onError: () => failVisual(t("auth.patient.invalidCode")),
+    });
+  }
+
+  useEffect(() => {
+    refs.current[0]?.focus();
+  }, []);
 
   return (
     <div
@@ -90,13 +104,32 @@ export default function PatientLoginPage() {
 
       <div style={{ width: "100%", maxWidth: "380px" }}>
         <div style={{ display: "flex", justifyContent: "center", marginBottom: "28px" }}>
-          <div style={{ width: "64px", height: "64px", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(14,165,233,0.12)", border: "1.5px solid rgba(14,165,233,0.3)" }}>
-            <LockKeyhole size={28} style={{ color: "var(--teal)" }} />
+          <div
+            style={{
+              width: "64px",
+              height: "64px",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              background: "rgba(14,165,233,0.12)",
+              border: "1.5px solid rgba(14,165,233,0.3)",
+            }}
+          >
+            <LockKeyhole size={28} style={{ color: "#0EA5E9" }} />
           </div>
         </div>
 
         <div style={{ textAlign: "center", marginBottom: "32px" }}>
-          <h1 style={{ fontSize: "24px", fontWeight: 700, color: "white", marginBottom: "8px", fontFamily: "var(--font-display)" }}>
+          <h1
+            style={{
+              fontSize: "24px",
+              fontWeight: 700,
+              color: "white",
+              marginBottom: "8px",
+              fontFamily: "var(--font-display)",
+            }}
+          >
             {t("auth.patient.title")}
           </h1>
           <p style={{ fontSize: "14px", lineHeight: 1.5, color: "var(--text-muted)" }}>
@@ -105,34 +138,68 @@ export default function PatientLoginPage() {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <p style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.15em", color: "var(--teal)", marginBottom: "12px", fontFamily: "var(--font-display)" }}>
+          <p
+            style={{
+              fontSize: "11px",
+              fontWeight: 600,
+              letterSpacing: "0.15em",
+              color: "#0EA5E9",
+              marginBottom: "12px",
+              fontFamily: "var(--font-display)",
+            }}
+          >
             {t("auth.patient.verification")}
           </p>
 
           <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
-            <span style={{ fontWeight: 700, fontSize: "16px", color: "white", fontFamily: "var(--font-display)", flexShrink: 0 }}>
+            <span
+              style={{
+                fontWeight: 700,
+                fontSize: "16px",
+                color: "white",
+                fontFamily: "var(--font-display)",
+                flexShrink: 0,
+              }}
+            >
               HOSP–
             </span>
-            <div style={{ display: "flex", gap: "8px", flex: 1, animation: shake ? "shake 0.4s ease" : undefined }}>
+            <div
+              style={{
+                display: "flex",
+                gap: "8px",
+                flex: 1,
+                animation: shake ? "shake 0.4s ease" : undefined,
+              }}
+            >
               {digits.map((d, i) => (
                 <input
                   key={i}
-                  ref={(el) => { refs.current[i] = el; }}
+                  ref={(el) => {
+                    refs.current[i] = el;
+                  }}
                   type="text"
-                  inputMode="numeric"
+                  inputMode="text"
                   maxLength={1}
                   value={d}
                   onChange={(e) => handleInput(i, e.target.value)}
                   onKeyDown={(e) => handleKeyDown(i, e)}
                   onPaste={handlePaste}
                   style={{
-                    flex: 1, minWidth: 0, width: "100%", height: "56px",
-                    textAlign: "center", fontSize: "22px", fontWeight: 700,
-                    borderRadius: "12px", outline: "none",
+                    flex: 1,
+                    minWidth: 0,
+                    width: "100%",
+                    height: "56px",
+                    textAlign: "center",
+                    fontSize: "22px",
+                    fontWeight: 700,
+                    borderRadius: "12px",
+                    outline: "none",
                     fontFamily: "var(--font-display)",
                     background: d ? "rgba(14,165,233,0.15)" : "rgba(255,255,255,0.07)",
-                    border: d ? "1.5px solid var(--teal)" : "1.5px solid rgba(255,255,255,0.12)",
-                    color: "white", caretColor: "var(--teal)", transition: "all 0.15s ease",
+                    border: d ? "1.5px solid #0EA5E9" : "1.5px solid rgba(255,255,255,0.12)",
+                    color: "white",
+                    caretColor: "#0EA5E9",
+                    transition: "all 0.15s ease",
                   }}
                 />
               ))}
@@ -140,35 +207,69 @@ export default function PatientLoginPage() {
           </div>
 
           {error && (
-            <p style={{ fontSize: "12px", textAlign: "center", marginBottom: "16px", color: "#FC8181" }}>
+            <p
+              style={{
+                fontSize: "12px",
+                textAlign: "center",
+                marginBottom: "16px",
+                color: "#FC8181",
+              }}
+            >
               {error}
             </p>
           )}
 
           <button
             type="submit"
-            disabled={!allFilled}
+            disabled={!allFilled || loading}
             style={{
-              width: "100%", display: "flex", alignItems: "center", justifyContent: "center",
-              gap: "8px", fontWeight: 600, fontSize: "14px", height: "52px",
-              borderRadius: "12px", border: "none",
-              background: allFilled ? "linear-gradient(135deg, var(--teal), #38BDF8)" : "rgba(255,255,255,0.08)",
-              color: allFilled ? "white" : "rgba(255,255,255,0.3)",
-              cursor: allFilled ? "pointer" : "not-allowed",
-              fontFamily: "var(--font-body)", transition: "all 0.15s ease",
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+              fontWeight: 600,
+              fontSize: "14px",
+              height: "52px",
+              borderRadius: "12px",
+              border: "none",
+              background:
+                allFilled && !loading
+                  ? "linear-gradient(135deg, #0EA5E9, #38BDF8)"
+                  : "rgba(255,255,255,0.08)",
+              color: allFilled && !loading ? "white" : "rgba(255,255,255,0.3)",
+              cursor: allFilled && !loading ? "pointer" : "not-allowed",
+              fontFamily: "var(--font-body)",
+              transition: "all 0.15s ease",
             }}
           >
-            {t("auth.patient.unlock")}
-            <ChevronRight size={17} />
+            {loading ? t("common.loading") : t("auth.patient.unlock")}
+            {!loading && <ChevronRight size={17} />}
           </button>
         </form>
 
-        <p style={{ textAlign: "center", fontSize: "12px", marginTop: "20px", color: "rgba(255,255,255,0.3)" }}>
+        <p
+          style={{
+            textAlign: "center",
+            fontSize: "12px",
+            marginTop: "20px",
+            color: "rgba(255,255,255,0.3)",
+          }}
+        >
           {t("auth.patient.lostCode")}{" "}
-          <span style={{ color: "var(--teal)", cursor: "pointer" }}>{t("auth.patient.contactSupport")}</span>
+          <span style={{ color: "#0EA5E9", cursor: "pointer" }}>
+            {t("auth.patient.contactSupport")}
+          </span>
         </p>
 
-        <p style={{ textAlign: "center", fontSize: "11px", marginTop: "40px", color: "rgba(255,255,255,0.15)" }}>
+        <p
+          style={{
+            textAlign: "center",
+            fontSize: "11px",
+            marginTop: "40px",
+            color: "rgba(255,255,255,0.15)",
+          }}
+        >
           {t("auth.patient.poweredBy")}
         </p>
       </div>
