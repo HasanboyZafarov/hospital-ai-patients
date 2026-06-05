@@ -5,7 +5,7 @@ import { usePatientLogin } from "../../api/hooks";
 import { LockKeyhole, ChevronRight } from "lucide-react";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
-import { LanguageSwitcher } from "../../components/LanguageSwitcher";
+import { LanguageSelect } from "../../components/LanguageSelect";
 
 export default function PatientLoginPage() {
   const { t } = useTranslation();
@@ -99,7 +99,7 @@ export default function PatientLoginPage() {
       }}
     >
       <div style={{ position: "absolute", top: 20, right: 20 }}>
-        <LanguageSwitcher variant="dark" />
+        <LanguageSelect variant="dark" />
       </div>
 
       <div style={{ width: "100%", maxWidth: "380px" }}>
