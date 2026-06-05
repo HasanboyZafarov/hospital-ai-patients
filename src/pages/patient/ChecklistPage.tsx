@@ -15,10 +15,10 @@ const typeIcon: Record<CareItemType, React.ElementType> = {
 };
 
 const typeStyle: Record<CareItemType, { bg: string; color: string; border: string }> = {
-  MEDICATION: { bg: "var(--teal-dim)", color: "#0EA5E9", border: "rgba(14,165,233,0.2)" },
+  MEDICATION: { bg: "var(--teal-dim)", color: "#144EED", border: "rgba(14,165,233,0.2)" },
   DIET: { bg: "rgba(5,150,105,0.07)", color: "var(--success)", border: "rgba(5,150,105,0.18)" },
-  ACTIVITY: { bg: "rgba(14,165,233,0.06)", color: "#0EA5E9", border: "rgba(14,165,233,0.14)" },
-  EXERCISE: { bg: "rgba(14,165,233,0.06)", color: "#0EA5E9", border: "rgba(14,165,233,0.14)" },
+  ACTIVITY: { bg: "rgba(14,165,233,0.06)", color: "#144EED", border: "rgba(14,165,233,0.14)" },
+  EXERCISE: { bg: "rgba(14,165,233,0.06)", color: "#144EED", border: "rgba(14,165,233,0.14)" },
   RESTRICTION: { bg: "rgba(229,62,62,0.06)", color: "var(--danger)", border: "rgba(229,62,62,0.15)" },
   CHECKUP: { bg: "rgba(217,119,6,0.06)", color: "var(--warning)", border: "rgba(217,119,6,0.15)" },
 };
@@ -84,7 +84,7 @@ export default function ChecklistPage() {
         <h1 className="text-xl font-semibold mb-1" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>{t("patient.checklist.title")}</h1>
         <p className="text-sm" style={{ color: "var(--text-secondary)" }}>{t("patient.checklist.progress", { done: completed, total })}</p>
         <div className="mt-3 h-1 rounded-full" style={{ background: "var(--border)" }}>
-          <div className="h-1 rounded-full transition-all duration-500" style={{ width: `${total > 0 ? Math.round((completed / total) * 100) : 0}%`, background: "#0EA5E9" }} />
+          <div className="h-1 rounded-full transition-all duration-500" style={{ width: `${total > 0 ? Math.round((completed / total) * 100) : 0}%`, background: "#144EED" }} />
         </div>
       </div>
 
@@ -118,7 +118,7 @@ export default function ChecklistPage() {
                   </span>
                 </div>
                 <p className="text-xs leading-snug" style={{ color: "var(--text-muted)" }}>{item.description}</p>
-                {item.scheduleTime && (<p className="text-xs mt-1 font-medium" style={{ color: "#0EA5E9" }}>{item.scheduleTime}</p>)}
+                {item.scheduleTime && (<p className="text-xs mt-1 font-medium" style={{ color: "#144EED" }}>{item.scheduleTime}</p>)}
               </div>
             </button>
           );

@@ -104,7 +104,7 @@ export default function CheckInPage() {
           <button onClick={() => navigate(-1)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}><ChevronLeft size={20} style={{ color: "var(--text-secondary)" }} /></button>
           <h1 className="font-bold text-base" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>{t("patient.checkIn.title")}</h1>
         </div>
-        <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: "var(--navy)", color: "#0EA5E9", fontFamily: "var(--font-display)" }}>
+        <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: "var(--navy)", color: "#144EED", fontFamily: "var(--font-display)" }}>
           {initials}
         </div>
       </div>
@@ -123,10 +123,10 @@ export default function CheckInPage() {
               const isSelected = mood === m.value;
               return (
                 <button key={m.value} onClick={() => setMood(m.value)} className="flex flex-col items-center gap-1.5" style={{ background: "none", border: "none", cursor: "pointer" }}>
-                  <div className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-150" style={{ background: isSelected ? "#0EA5E9" : "var(--surface)", border: isSelected ? "none" : "1.5px solid var(--border)" }}>
+                  <div className="w-11 h-11 rounded-full flex items-center justify-center transition-all duration-150" style={{ background: isSelected ? "#144EED" : "var(--surface)", border: isSelected ? "none" : "1.5px solid var(--border)" }}>
                     <MoodIcon size={20} style={{ color: isSelected ? "white" : "var(--text-muted)" }} />
                   </div>
-                  <span className="text-xs font-medium" style={{ color: isSelected ? "#0EA5E9" : "var(--text-muted)", fontFamily: "var(--font-body)" }}>{t(`mood.${m.value}`)}</span>
+                  <span className="text-xs font-medium" style={{ color: isSelected ? "#144EED" : "var(--text-muted)", fontFamily: "var(--font-body)" }}>{t(`mood.${m.value}`)}</span>
                 </button>
               );
             })}
@@ -136,7 +136,7 @@ export default function CheckInPage() {
         <div className="rounded-2xl p-4" style={{ background: "var(--surface-card)", border: "1px solid var(--border)" }}>
           <div className="flex items-center justify-between mb-4">
             <p className="font-semibold text-sm" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>{t("patient.checkIn.painLevel")}</p>
-            <span className="text-lg font-bold" style={{ fontFamily: "var(--font-display)", color: "#0EA5E9" }}>{painLevel}</span>
+            <span className="text-lg font-bold" style={{ fontFamily: "var(--font-display)", color: "#144EED" }}>{painLevel}</span>
           </div>
           <div className="relative" style={{ height: "20px" }}>
             <div className="absolute top-1/2 left-0 right-0 rounded-full pointer-events-none" style={{ height: "6px", transform: "translateY(-50%)", background: "linear-gradient(to right, #22c55e 0%, #eab308 50%, #ef4444 100%)" }} />
@@ -167,7 +167,7 @@ export default function CheckInPage() {
             {SYMPTOMS.map((s) => {
               const active = symptoms.includes(s);
               return (
-                <button key={s} onClick={() => toggleSymptom(s)} className="px-3.5 py-1.5 rounded-full text-xs font-medium transition-all" style={{ background: active ? "var(--teal-dim)" : "var(--surface)", border: active ? "1.5px solid #0EA5E9" : "1.5px solid var(--border)", color: active ? "#0EA5E9" : "var(--text-secondary)", cursor: "pointer", fontFamily: "var(--font-body)" }}>
+                <button key={s} onClick={() => toggleSymptom(s)} className="px-3.5 py-1.5 rounded-full text-xs font-medium transition-all" style={{ background: active ? "var(--teal-dim)" : "var(--surface)", border: active ? "1.5px solid #144EED" : "1.5px solid var(--border)", color: active ? "#144EED" : "var(--text-secondary)", cursor: "pointer", fontFamily: "var(--font-body)" }}>
                   {t(`symptoms.${s}`, s)}
                 </button>
               );
@@ -183,7 +183,7 @@ export default function CheckInPage() {
         </div>
 
         <div>
-          <button onClick={submit} disabled={submitting} className="w-full flex items-center justify-center gap-2 font-semibold text-sm transition-all" style={{ height: "52px", borderRadius: "14px", background: submitting ? "var(--border)" : "linear-gradient(135deg, #0EA5E9 0%, #38BDF8 100%)", color: submitting ? "var(--text-muted)" : "white", fontFamily: "var(--font-body)", border: "none", cursor: submitting ? "wait" : "pointer" }}>
+          <button onClick={submit} disabled={submitting} className="w-full flex items-center justify-center gap-2 font-semibold text-sm transition-all" style={{ height: "52px", borderRadius: "14px", background: submitting ? "var(--border)" : "linear-gradient(135deg, #144EED 0%, #1D4ED8 100%)", color: submitting ? "var(--text-muted)" : "white", fontFamily: "var(--font-body)", border: "none", cursor: submitting ? "wait" : "pointer" }}>
             {submitting ? t("common.loading") : t("patient.checkIn.submit")} {!submitting && <Thermometer size={16} />}
           </button>
           <p className="text-xs text-center mt-2 leading-relaxed" style={{ color: "var(--text-muted)" }}>{t("patient.checkIn.encrypted")}</p>
@@ -192,7 +192,7 @@ export default function CheckInPage() {
         <div className="rounded-2xl p-4" style={{ background: "var(--navy)" }}>
           <div className="flex items-start gap-3">
             <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "rgba(14,165,233,0.2)" }}>
-              <Bot size={18} style={{ color: "#0EA5E9" }} />
+              <Bot size={18} style={{ color: "#144EED" }} />
             </div>
             <div>
               <p className="font-semibold text-sm text-white mb-1" style={{ fontFamily: "var(--font-display)" }}>{t("patient.checkIn.aiHealthGuide")}</p>
@@ -203,8 +203,8 @@ export default function CheckInPage() {
       </div>
 
       <style>{`
-        .pain-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #0EA5E9; border: 3px solid white; box-shadow: 0 1px 6px rgba(0,0,0,0.18); cursor: pointer; }
-        .pain-slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #0EA5E9; box-shadow: 0 1px 6px rgba(0,0,0,0.18); cursor: pointer; border: none; }
+        .pain-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #144EED; border: 3px solid white; box-shadow: 0 1px 6px rgba(0,0,0,0.18); cursor: pointer; }
+        .pain-slider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: #144EED; box-shadow: 0 1px 6px rgba(0,0,0,0.18); cursor: pointer; border: none; }
       `}</style>
     </div>
   );

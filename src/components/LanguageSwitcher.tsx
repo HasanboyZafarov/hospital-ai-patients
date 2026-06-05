@@ -39,7 +39,7 @@ export function LanguageSwitcher({ variant = "dark" }: Props) {
               fontFamily: "var(--font-display)",
               letterSpacing: "0.05em",
               background: isActive
-                ? isDark ? "#0EA5E9" : "var(--surface-card)"
+                ? isDark ? "#144EED" : "var(--surface-card)"
                 : "transparent",
               color: isActive
                 ? isDark ? "white" : "var(--navy)"

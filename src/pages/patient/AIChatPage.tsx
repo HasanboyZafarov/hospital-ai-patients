@@ -175,7 +175,7 @@ export default function AIChatPage() {
           className="flex items-center justify-center flex-shrink-0 transition-all"
           style={{
             width: "40px", height: "40px", borderRadius: "12px",
-            background: !input.trim() || loading ? "var(--border)" : "#0EA5E9",
+            background: !input.trim() || loading ? "var(--border)" : "#144EED",
             color: !input.trim() || loading ? "var(--text-muted)" : "white",
             border: "none", cursor: !input.trim() || loading ? "not-allowed" : "pointer",
           }}>

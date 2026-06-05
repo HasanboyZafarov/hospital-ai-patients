@@ -33,7 +33,7 @@ function Sparkline({ data }: { data: number[] }) {
     .join(" ");
   return (
     <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{ overflow: "visible" }}>
-      <polyline points={pts} fill="none" stroke="#0EA5E9" strokeWidth="2.5"
+      <polyline points={pts} fill="none" stroke="#144EED" strokeWidth="2.5"
         strokeLinejoin="round" strokeLinecap="round" />
     </svg>
   );
@@ -126,7 +126,7 @@ export default function PatientHomePage() {
         </div>
         <div
           className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-1"
-          style={{ background: "var(--navy)", color: "#0EA5E9", fontFamily: "var(--font-display)", border: "2px solid rgba(14,165,233,0.25)" }}
+          style={{ background: "var(--navy)", color: "#144EED", fontFamily: "var(--font-display)", border: "2px solid rgba(14,165,233,0.25)" }}
         >
           {initials}
         </div>
@@ -142,10 +142,10 @@ export default function PatientHomePage() {
             <span className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>{t("common.days")}</span>
           </div>
           <div className="flex-1 min-w-0">
-            <p className="font-semibold" style={{ color: "#0EA5E9", fontFamily: "var(--font-display)", fontSize: "15px" }}>{recoveryPhase}</p>
+            <p className="font-semibold" style={{ color: "#144EED", fontFamily: "var(--font-display)", fontSize: "15px" }}>{recoveryPhase}</p>
             <p className="text-xs mt-0.5 leading-snug" style={{ color: "rgba(255,255,255,0.5)" }}>{t("patient.home.phaseProgress", { pct: progressPct })}</p>
             <div className="mt-2 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.1)" }}>
-              <div className="h-1 rounded-full" style={{ width: `${progressPct}%`, background: "linear-gradient(90deg, #0EA5E9, #38BDF8)" }} />
+              <div className="h-1 rounded-full" style={{ width: `${progressPct}%`, background: "linear-gradient(90deg, #144EED, #1D4ED8)" }} />
             </div>
           </div>
         </div>
@@ -153,7 +153,7 @@ export default function PatientHomePage() {
         <button
           onClick={() => navigate("/checkin")}
           className="w-full flex items-center justify-center gap-2.5 font-semibold transition-all duration-150"
-          style={{ height: "52px", borderRadius: "16px", background: "linear-gradient(135deg, #0EA5E9 0%, #38BDF8 100%)", color: "white", fontFamily: "var(--font-display)", fontSize: "15px", border: "none", cursor: "pointer" }}
+          style={{ height: "52px", borderRadius: "16px", background: "linear-gradient(135deg, #144EED 0%, #1D4ED8 100%)", color: "white", fontFamily: "var(--font-display)", fontSize: "15px", border: "none", cursor: "pointer" }}
         >
           <CheckCircle size={20} />
           {t("patient.home.dailyCheckIn")}
@@ -200,7 +200,7 @@ export default function PatientHomePage() {
                     style={{ background: "var(--surface-card)", border: "1px solid var(--border)", padding: "12px 14px", cursor: "pointer" }}
                   >
                     <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "var(--teal-dim)" }}>
-                      <Icon size={16} style={{ color: "#0EA5E9" }} />
+                      <Icon size={16} style={{ color: "#144EED" }} />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-semibold truncate" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>{item.title}</p>
@@ -228,8 +228,8 @@ export default function PatientHomePage() {
             </div>
             <div className="flex-1 flex flex-col items-end gap-1.5">
               <div className="flex items-center gap-1">
-                <TrendingUp size={13} style={{ color: "#0EA5E9" }} />
-                <span className="text-xs font-semibold" style={{ color: "#0EA5E9", fontFamily: "var(--font-display)" }}>{t("patient.home.steadyProgress")}</span>
+                <TrendingUp size={13} style={{ color: "#144EED" }} />
+                <span className="text-xs font-semibold" style={{ color: "#144EED", fontFamily: "var(--font-display)" }}>{t("patient.home.steadyProgress")}</span>
               </div>
               {painTrend.length > 1 && <Sparkline data={painTrend} />}
             </div>

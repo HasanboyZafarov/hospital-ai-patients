@@ -52,7 +52,7 @@ export function ErrorState({ title, message, onRetry, compact = false }: Props) 
             marginTop: "8px",
             padding: "10px 18px",
             borderRadius: "12px",
-            background: "#0EA5E9",
+            background: "#144EED",
             color: "white",
             border: "none",
             cursor: "pointer",

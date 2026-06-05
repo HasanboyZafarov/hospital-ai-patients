@@ -90,13 +90,13 @@ export default function MedicationsPage() {
         <div className="flex items-center gap-3">
           <button style={{ background: "none", border: "none", padding: 0, cursor: "pointer", display: "flex" }}><HelpCircle size={20} style={{ color: "var(--text-muted)" }} /></button>
           <button style={{ background: "none", border: "none", padding: 0, cursor: "pointer", display: "flex" }}><Bell size={20} style={{ color: "var(--text-muted)" }} /></button>
-          <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: "var(--navy)", color: "#0EA5E9", fontFamily: "var(--font-display)" }}>{initials}</div>
+          <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: "var(--navy)", color: "#144EED", fontFamily: "var(--font-display)" }}>{initials}</div>
         </div>
       </div>
 
       <div className="px-5 pt-5 pb-6 space-y-4">
         <div>
-          <p className="text-xs font-semibold tracking-widest mb-1" style={{ color: "#0EA5E9", fontFamily: "var(--font-display)" }}>{t("patient.medications.dailyProgress")}</p>
+          <p className="text-xs font-semibold tracking-widest mb-1" style={{ color: "#144EED", fontFamily: "var(--font-display)" }}>{t("patient.medications.dailyProgress")}</p>
           <h1 className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>{t("patient.medications.title")}</h1>
         </div>
 
@@ -104,7 +104,7 @@ export default function MedicationsPage() {
           <div className="rounded-2xl p-4" style={{ background: "var(--surface-card)", border: "1px solid var(--border)" }}>
             <p className="text-sm font-semibold mb-2.5" style={{ color: "var(--text-primary)" }}>{t("patient.medications.completedToday", { done: takenCount, total: totalCount })}</p>
             <div className="h-1.5 rounded-full" style={{ background: "var(--border)" }}>
-              <div className="h-1.5 rounded-full transition-all duration-500" style={{ width: `${progressPct}%`, background: "#0EA5E9" }} />
+              <div className="h-1.5 rounded-full transition-all duration-500" style={{ width: `${progressPct}%`, background: "#144EED" }} />
             </div>
           </div>
         )}
@@ -125,16 +125,16 @@ export default function MedicationsPage() {
               const key = `${med.itemId}-${med.scheduleTime ?? ""}`;
 
               return (
-                <div key={key} className="rounded-2xl overflow-hidden" style={{ background: "var(--surface-card)", border: isDue ? "1.5px solid #0EA5E9" : "1px solid var(--border)", opacity: isTaken ? 0.65 : 1 }}>
+                <div key={key} className="rounded-2xl overflow-hidden" style={{ background: "var(--surface-card)", border: isDue ? "1.5px solid #144EED" : "1px solid var(--border)", opacity: isTaken ? 0.65 : 1 }}>
                   <div className="flex items-center gap-3 px-4 py-3.5">
                     <div className="flex-shrink-0 w-14">
                       <p className="text-xs font-medium" style={{ color: isTaken ? "var(--text-muted)" : "var(--text-secondary)", fontFamily: "var(--font-display)" }}>{med.scheduleTime ?? "—"}</p>
                     </div>
                     <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: isTaken ? "rgba(5,150,105,0.08)" : isDue ? "var(--teal-dim)" : "var(--surface)" }}>
-                      {isTaken ? <CheckCircle2 size={18} style={{ color: "var(--success)" }} /> : isDue ? <Pill size={18} style={{ color: "#0EA5E9" }} /> : <Clock size={18} style={{ color: "var(--text-muted)" }} />}
+                      {isTaken ? <CheckCircle2 size={18} style={{ color: "var(--success)" }} /> : isDue ? <Pill size={18} style={{ color: "#144EED" }} /> : <Clock size={18} style={{ color: "var(--text-muted)" }} />}
                     </div>
                     <div className="flex-1 min-w-0">
-                      {isDue && (<span className="text-xs font-bold px-2 py-0.5 rounded-full flex-shrink-0" style={{ background: "var(--teal-dim)", color: "#0EA5E9", fontFamily: "var(--font-display)" }}>{t("patient.medications.nowDue")}</span>)}
+                      {isDue && (<span className="text-xs font-bold px-2 py-0.5 rounded-full flex-shrink-0" style={{ background: "var(--teal-dim)", color: "#144EED", fontFamily: "var(--font-display)" }}>{t("patient.medications.nowDue")}</span>)}
                       <p className="text-sm font-semibold mt-0.5 truncate" style={{ fontFamily: "var(--font-display)", color: isTaken ? "var(--text-muted)" : "var(--text-primary)", textDecoration: isTaken ? "line-through" : "none" }}>{med.title}{med.dosage ? ` · ${med.dosage}` : ""}</p>
                       {med.frequency && <p className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>{med.frequency}</p>}
                     </div>
@@ -160,16 +160,16 @@ export default function MedicationsPage() {
 
         <div className="rounded-2xl p-4" style={{ background: "var(--surface-card)", border: "1px solid var(--border)" }}>
           <div className="flex items-start gap-2 mb-2">
-            <TrendingUp size={16} style={{ color: "#0EA5E9", marginTop: 1, flexShrink: 0 }} />
+            <TrendingUp size={16} style={{ color: "#144EED", marginTop: 1, flexShrink: 0 }} />
             <p className="font-semibold text-sm" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>{t("patient.medications.recoveryInsight")}</p>
           </div>
           <p className="text-xs leading-relaxed mb-2" style={{ color: "var(--text-secondary)" }}>{t("patient.medications.insightBody")}</p>
-          <p className="text-xs font-semibold" style={{ color: "#0EA5E9" }}>{t("patient.medications.stability")}</p>
+          <p className="text-xs font-semibold" style={{ color: "#144EED" }}>{t("patient.medications.stability")}</p>
         </div>
 
         <div className="rounded-2xl p-4" style={{ background: "var(--navy)" }}>
           <div className="flex items-start gap-2 mb-1.5">
-            <Droplets size={16} style={{ color: "#0EA5E9", marginTop: 1, flexShrink: 0 }} />
+            <Droplets size={16} style={{ color: "#144EED", marginTop: 1, flexShrink: 0 }} />
             <p className="font-semibold text-sm text-white" style={{ fontFamily: "var(--font-display)" }}>{t("patient.medications.hydrationAlert")}</p>
           </div>
           <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>{t("patient.medications.hydrationBody")}</p>

@@ -69,7 +69,7 @@ export function LanguageSelect({ variant = "dark" }: Props) {
           letterSpacing: "0.05em",
         }}
       >
-        <Globe size={14} style={{ color: isDark ? "#0EA5E9" : "var(--text-secondary)" }} />
+        <Globe size={14} style={{ color: isDark ? "#144EED" : "var(--text-secondary)" }} />
         <span>{current.short}</span>
         <ChevronDown
           size={14}
@@ -132,7 +132,7 @@ export function LanguageSelect({ variant = "dark" }: Props) {
                       width: "22px",
                       height: "22px",
                       borderRadius: "6px",
-                      background: active ? "#0EA5E9" : isDark ? "rgba(255,255,255,0.05)" : "var(--surface)",
+                      background: active ? "#144EED" : isDark ? "rgba(255,255,255,0.05)" : "var(--surface)",
                       color: active ? "white" : mutedText,
                       fontSize: "10px",
                       fontWeight: 700,
@@ -143,7 +143,7 @@ export function LanguageSelect({ variant = "dark" }: Props) {
                     {l.short}
                   </span>
                   <span style={{ flex: 1, fontWeight: active ? 600 : 500 }}>{l.label}</span>
-                  {active && <Check size={14} style={{ color: "#0EA5E9", flexShrink: 0 }} />}
+                  {active && <Check size={14} style={{ color: "#144EED", flexShrink: 0 }} />}
                 </button>
               </li>
             );

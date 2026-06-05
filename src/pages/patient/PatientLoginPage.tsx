@@ -115,7 +115,7 @@ export default function PatientLoginPage() {
               border: "1.5px solid rgba(14,165,233,0.3)",
             }}
           >
-            <LockKeyhole size={28} style={{ color: "#0EA5E9" }} />
+            <LockKeyhole size={28} style={{ color: "#144EED" }} />
           </div>
         </div>
 
@@ -142,7 +142,7 @@ export default function PatientLoginPage() {
               fontSize: "11px",
               fontWeight: 600,
               letterSpacing: "0.15em",
-              color: "#0EA5E9",
+              color: "#144EED",
               marginBottom: "12px",
               fontFamily: "var(--font-display)",
             }}
@@ -196,9 +196,9 @@ export default function PatientLoginPage() {
                     outline: "none",
                     fontFamily: "var(--font-display)",
                     background: d ? "rgba(14,165,233,0.15)" : "rgba(255,255,255,0.07)",
-                    border: d ? "1.5px solid #0EA5E9" : "1.5px solid rgba(255,255,255,0.12)",
+                    border: d ? "1.5px solid #144EED" : "1.5px solid rgba(255,255,255,0.12)",
                     color: "white",
-                    caretColor: "#0EA5E9",
+                    caretColor: "#144EED",
                     transition: "all 0.15s ease",
                   }}
                 />
@@ -235,7 +235,7 @@ export default function PatientLoginPage() {
               border: "none",
               background:
                 allFilled && !loading
-                  ? "linear-gradient(135deg, #0EA5E9, #38BDF8)"
+                  ? "linear-gradient(135deg, #144EED, #1D4ED8)"
                   : "rgba(255,255,255,0.08)",
               color: allFilled && !loading ? "white" : "rgba(255,255,255,0.3)",
               cursor: allFilled && !loading ? "pointer" : "not-allowed",
@@ -257,7 +257,7 @@ export default function PatientLoginPage() {
           }}
         >
           {t("auth.patient.lostCode")}{" "}
-          <span style={{ color: "#0EA5E9", cursor: "pointer" }}>
+          <span style={{ color: "#144EED", cursor: "pointer" }}>
             {t("auth.patient.contactSupport")}
           </span>
         </p>

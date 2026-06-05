@@ -88,7 +88,7 @@ export default function DietPage() {
           return (
             <div key={i} className="p-4 rounded-2xl min-w-0 overflow-hidden" style={{ background: "var(--surface-card)", border: "1px solid var(--border)" }}>
               <div className="w-8 h-8 rounded-xl flex items-center justify-center mb-2.5" style={{ background: "var(--teal-dim)" }}>
-                <Icon size={16} style={{ color: "#0EA5E9" }} />
+                <Icon size={16} style={{ color: "#144EED" }} />
               </div>
               <p className="font-semibold text-sm mb-1 break-words" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>{tip.title}</p>
               <p className="text-xs leading-relaxed break-words" style={{ color: "var(--text-secondary)" }}>{tip.text}</p>

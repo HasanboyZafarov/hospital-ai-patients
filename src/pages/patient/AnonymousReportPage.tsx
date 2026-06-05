@@ -2,17 +2,24 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ChevronLeft, Stethoscope, Heart, Settings, Building2, Pill, MoreHorizontal, CheckCircle2, Shield } from "lucide-react";
+import { toast } from "react-toastify";
+import { useSubmitComplaint } from "../../api/hooks";
+import type { ComplaintCategory, ComplaintUrgency } from "../../api/hooks";
 
 const CATEGORIES = [
-  { key: "doctor",     Icon: Stethoscope },
-  { key: "nurse",      Icon: Heart },
-  { key: "service",    Icon: Settings },
-  { key: "facility",   Icon: Building2 },
-  { key: "medication", Icon: Pill },
-  { key: "other",      Icon: MoreHorizontal },
+  { key: "doctor",     api: "DOCTOR" as ComplaintCategory,     Icon: Stethoscope },
+  { key: "nurse",      api: "NURSE" as ComplaintCategory,      Icon: Heart },
+  { key: "service",    api: "SERVICE" as ComplaintCategory,    Icon: Settings },
+  { key: "facility",   api: "FACILITY" as ComplaintCategory,   Icon: Building2 },
+  { key: "medication", api: "MEDICATION" as ComplaintCategory, Icon: Pill },
+  { key: "other",      api: "OTHER" as ComplaintCategory,      Icon: MoreHorizontal },
 ] as const;
 
-const URGENCIES = ["low", "medium", "high"] as const;
+const URGENCIES: { key: "low" | "medium" | "high"; api: ComplaintUrgency }[] = [
+  { key: "low",    api: "LOW" },
+  { key: "medium", api: "MEDIUM" },
+  { key: "high",   api: "HIGH" },
+];
 
 const URGENCY_STYLE: Record<string, { bg: string; color: string; border: string }> = {
   low:    { bg: "rgba(5,150,105,0.08)",  color: "var(--success)", border: "rgba(5,150,105,0.25)" },
@@ -25,8 +32,9 @@ export default function AnonymousReportPage() {
   const { t } = useTranslation();
   const [category, setCategory] = useState<string | null>(null);
   const [details, setDetails] = useState("");
-  const [urgency, setUrgency] = useState<string>("medium");
+  const [urgency, setUrgency] = useState<"low" | "medium" | "high">("medium");
   const [submitted, setSubmitted] = useState(false);
+  const submit = useSubmitComplaint();
 
   if (submitted) {
     return (
@@ -101,22 +109,38 @@ export default function AnonymousReportPage() {
         <div>
           <p className="text-sm font-semibold mb-2.5" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>{t("patient.report.urgencyLabel")}</p>
           <div className="flex gap-2">
-            {URGENCIES.map((u) => {
-              const isActive = urgency === u;
-              const s = URGENCY_STYLE[u];
+            {URGENCIES.map(({ key }) => {
+              const isActive = urgency === key;
+              const s = URGENCY_STYLE[key];
               return (
-                <button key={u} onClick={() => setUrgency(u)} className="flex-1 py-2.5 rounded-xl text-xs font-semibold transition-all"
+                <button key={key} onClick={() => setUrgency(key)} className="flex-1 py-2.5 rounded-xl text-xs font-semibold transition-all"
                   style={{ background: isActive ? s.bg : "var(--surface-card)", border: isActive ? `1.5px solid ${s.border}` : "1px solid var(--border)", color: isActive ? s.color : "var(--text-muted)", fontFamily: "var(--font-display)", cursor: "pointer" }}>
-                  {t(`patient.report.urgency.${u}`)}
+                  {t(`patient.report.urgency.${key}`)}
                 </button>
               );
             })}
           </div>
         </div>
 
-        <button onClick={() => details.trim() && category && setSubmitted(true)} disabled={!canSubmit} className="w-full font-semibold text-sm transition-all"
-          style={{ height: "52px", borderRadius: "14px", background: canSubmit ? "linear-gradient(135deg, var(--teal) 0%, #38BDF8 100%)" : "var(--border)", color: canSubmit ? "white" : "var(--text-muted)", fontFamily: "var(--font-body)", border: "none", cursor: canSubmit ? "pointer" : "not-allowed" }}>
-          {t("patient.report.submit")}
+        <button
+          onClick={() => {
+            if (!canSubmit || submit.isPending) return;
+            const cat = CATEGORIES.find((c) => c.key === category)?.api;
+            const urg = URGENCIES.find((u) => u.key === urgency)?.api ?? "MEDIUM";
+            if (!cat) return;
+            submit.mutate(
+              { category: cat, description: details.trim(), urgency: urg },
+              {
+                onSuccess: () => setSubmitted(true),
+                onError: () => toast.error(t("common.errorLoading", "Failed to submit")),
+              }
+            );
+          }}
+          disabled={!canSubmit || submit.isPending}
+          className="w-full font-semibold text-sm transition-all"
+          style={{ height: "52px", borderRadius: "14px", background: canSubmit && !submit.isPending ? "linear-gradient(135deg, #144EED 0%, #1D4ED8 100%)" : "var(--border)", color: canSubmit && !submit.isPending ? "white" : "var(--text-muted)", fontFamily: "var(--font-body)", border: "none", cursor: canSubmit && !submit.isPending ? "pointer" : "not-allowed" }}
+        >
+          {submit.isPending ? t("common.loading") : t("patient.report.submit")}
         </button>
       </div>
     </div>

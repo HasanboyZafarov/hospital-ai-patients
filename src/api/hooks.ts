@@ -186,6 +186,20 @@ export const useChatHistory = () =>
     queryFn: () => apiClient.get("/me/chat/history").then((r) => r.data),
   });
 
+export type ComplaintCategory = "DOCTOR" | "NURSE" | "SERVICE" | "FACILITY" | "MEDICATION" | "OTHER";
+export type ComplaintUrgency = "LOW" | "MEDIUM" | "HIGH";
+
+export interface ComplaintBody {
+  category: ComplaintCategory;
+  description: string;
+  urgency: ComplaintUrgency;
+}
+
+export const useSubmitComplaint = () =>
+  useMutation<unknown, Error, ComplaintBody>({
+    mutationFn: (body) => apiClient.post("/me/complaints", body).then((r) => r.data),
+  });
+
 export const usePatientLogin = () =>
   useMutation<LoginResponse, Error, string>({
     mutationFn: (accessCode) =>
