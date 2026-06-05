@@ -122,7 +122,7 @@
       "heroSubtitle": "A patient-centered recovery interface with secure access to your health records, care plan, and AI-assisted recovery guidance.",
       "verification": "PATIENT VERIFICATION",
       "unlock": "Unlock Portal",
-      "invalidCode": "Invalid code — try 1234",
+      "invalidCode": "Invalid code",
       "welcomeBack": "Welcome back, {{name}}!",
       "lostCode": "Lost your code?",
       "contactSupport": "Contact Support",

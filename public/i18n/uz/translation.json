@@ -122,7 +122,7 @@
       "heroSubtitle": "Bemorga yo'naltirilgan tiklanish interfeysli xavfsiz kirish — tibbiy yozuvlar, davolash rejasi va AI yordami.",
       "verification": "BEMORNI TASDIQLASH",
       "unlock": "Portalga kirish",
-      "invalidCode": "Kod noto‘g‘ri — 1234 ni sinab ko‘ring",
+      "invalidCode": "Kod noto‘g‘ri",
       "welcomeBack": "Xush kelibsiz, {{name}}!",
       "lostCode": "Kodingiz yo‘qoldimi?",
       "contactSupport": "Yordamga murojaat",

@@ -21,7 +21,7 @@ export default function PatientLoginPage() {
   const loading = login.isPending;
 
   function handleInput(i: number, val: string) {
-    const v = val.replace(/[^0-9a-zA-Z]/g, "");
+    const v = val.replace(/[^0-9]/g, "");
     if (!v) {
       const next = [...digits];
       next[i] = "";
@@ -29,7 +29,7 @@ export default function PatientLoginPage() {
       return;
     }
     const next = [...digits];
-    next[i] = v[v.length - 1].toUpperCase();
+    next[i] = v[v.length - 1];
     setDigits(next);
     if (i < 3) refs.current[i + 1]?.focus();
   }
@@ -43,9 +43,8 @@ export default function PatientLoginPage() {
   function handlePaste(e: React.ClipboardEvent) {
     const text = e.clipboardData
       .getData("text")
-      .replace(/[^0-9a-zA-Z]/g, "")
-      .slice(0, 4)
-      .toUpperCase();
+      .replace(/[^0-9]/g, "")
+      .slice(0, 4);
     const next = Array(4).fill("");
     text.split("").forEach((c, i) => {
       next[i] = c;
@@ -178,7 +177,8 @@ export default function PatientLoginPage() {
                     refs.current[i] = el;
                   }}
                   type="text"
-                  inputMode="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
                   maxLength={1}
                   value={d}
                   onChange={(e) => handleInput(i, e.target.value)}
