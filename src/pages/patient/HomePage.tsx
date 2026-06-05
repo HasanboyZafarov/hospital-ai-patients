@@ -50,12 +50,12 @@ function HomeSkeleton() {
         <Skeleton width={40} height={40} radius={999} />
       </div>
       <div className="px-4 pt-4 pb-6 space-y-4">
-        <div className="rounded-2xl p-4 flex items-center gap-4" style={{ background: "var(--navy)" }}>
-          <Skeleton width={60} height={60} radius={999} dark />
+        <div className="rounded-2xl p-4 flex items-center gap-4" style={{ background: "var(--bg-card)", border: "1px solid var(--c-border)", boxShadow: "var(--shadow-card)" }}>
+          <Skeleton width={60} height={60} radius={999} />
           <div className="flex-1 flex flex-col gap-2">
-            <Skeleton width="60%" height={14} dark />
-            <Skeleton width="40%" height={10} dark />
-            <Skeleton width="100%" height={4} radius={999} dark />
+            <Skeleton width="60%" height={14} />
+            <Skeleton width="40%" height={10} />
+            <Skeleton width="100%" height={4} radius={999} />
           </div>
         </div>
         <Skeleton width="100%" height={52} radius={16} />
@@ -126,25 +126,25 @@ export default function PatientHomePage() {
         </div>
         <div
           className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 mt-1"
-          style={{ background: "var(--navy)", color: "#144EED", fontFamily: "var(--font-display)", border: "2px solid rgba(14,165,233,0.25)" }}
+          style={{ background: "#144EED", color: "white", fontFamily: "var(--font-display)", border: "none" }}
         >
           {initials}
         </div>
       </div>
 
       <div className="px-4 pt-4 pb-6 space-y-4">
-        <div className="rounded-2xl p-4 flex items-center gap-4" style={{ background: "var(--navy)" }}>
+        <div className="rounded-2xl p-4 flex items-center gap-4" style={{ background: "var(--bg-card)", border: "1px solid var(--c-border)", boxShadow: "var(--shadow-card)" }}>
           <div
             className="w-[60px] h-[60px] rounded-full flex flex-col items-center justify-center flex-shrink-0"
-            style={{ background: "rgba(255,255,255,0.08)", border: "1.5px solid rgba(255,255,255,0.12)" }}
+            style={{ background: "var(--bg-app)", border: "1.5px solid var(--c-border)" }}
           >
-            <span className="text-xl font-bold text-white leading-none" style={{ fontFamily: "var(--font-display)" }}>{postOpDay}</span>
-            <span className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>{t("common.days")}</span>
+            <span className="text-xl font-bold leading-none" style={{ fontFamily: "var(--font-display)", color: "#144EED" }}>{postOpDay}</span>
+            <span className="text-xs mt-0.5" style={{ color: "var(--c-muted)" }}>{t("common.days")}</span>
           </div>
           <div className="flex-1 min-w-0">
             <p className="font-semibold" style={{ color: "#144EED", fontFamily: "var(--font-display)", fontSize: "15px" }}>{recoveryPhase}</p>
-            <p className="text-xs mt-0.5 leading-snug" style={{ color: "rgba(255,255,255,0.5)" }}>{t("patient.home.phaseProgress", { pct: progressPct })}</p>
-            <div className="mt-2 h-1 rounded-full" style={{ background: "rgba(255,255,255,0.1)" }}>
+            <p className="text-xs mt-0.5 leading-snug" style={{ color: "var(--c-text-2)" }}>{t("patient.home.phaseProgress", { pct: progressPct })}</p>
+            <div className="mt-2 h-1 rounded-full" style={{ background: "var(--bg-app)" }}>
               <div className="h-1 rounded-full" style={{ width: `${progressPct}%`, background: "linear-gradient(90deg, #144EED, #1D4ED8)" }} />
             </div>
           </div>

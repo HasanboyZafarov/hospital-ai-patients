@@ -52,7 +52,7 @@ export default function AnonymousReportPage() {
             <Shield size={16} style={{ color: "var(--teal)", flexShrink: 0, marginTop: 1 }} />
             <p className="text-xs leading-relaxed" style={{ color: "var(--text-secondary)" }}>{t("patient.report.subtitle")}</p>
           </div>
-          <button onClick={() => navigate("/profile")} className="w-full font-semibold text-sm" style={{ height: "52px", borderRadius: "14px", background: "var(--navy)", color: "white", fontFamily: "var(--font-body)", border: "none", cursor: "pointer" }}>
+          <button onClick={() => navigate("/profile")} className="w-full font-semibold text-sm" style={{ height: "52px", borderRadius: "14px", background: "#144EED", color: "white", fontFamily: "var(--font-body)", border: "none", cursor: "pointer", boxShadow: "var(--shadow-blue)" }}>
             {t("patient.report.backToProfile")}
           </button>
         </div>

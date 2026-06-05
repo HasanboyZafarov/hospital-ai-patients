@@ -126,7 +126,7 @@ export default function AIChatPage() {
           <div key={i} className={`flex flex-col ${msg.role === "user" ? "items-end" : "items-start"}`}>
             <div className="max-w-[82%] px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap"
               style={{
-                background: msg.role === "assistant" ? "var(--surface-card)" : "var(--navy)",
+                background: msg.role === "assistant" ? "var(--surface-card)" : "#144EED",
                 border: msg.role === "assistant" ? "1px solid var(--border)" : "none",
                 color: msg.role === "assistant" ? "var(--text-primary)" : "white",
                 borderRadius: msg.role === "assistant" ? "4px 16px 16px 16px" : "16px 4px 16px 16px",

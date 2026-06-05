@@ -42,7 +42,7 @@ export function LanguageSwitcher({ variant = "dark" }: Props) {
                 ? isDark ? "#144EED" : "var(--surface-card)"
                 : "transparent",
               color: isActive
-                ? isDark ? "white" : "var(--navy)"
+                ? isDark ? "white" : "var(--brand-dark)"
                 : isDark ? "rgba(255,255,255,0.45)" : "var(--text-muted)",
               boxShadow: isActive && !isDark ? "0 1px 3px rgba(10,22,40,0.08), 0 0 0 1px var(--border)" : "none",
             }}

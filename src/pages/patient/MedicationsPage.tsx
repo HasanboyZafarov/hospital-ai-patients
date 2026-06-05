@@ -90,7 +90,7 @@ export default function MedicationsPage() {
         <div className="flex items-center gap-3">
           <button style={{ background: "none", border: "none", padding: 0, cursor: "pointer", display: "flex" }}><HelpCircle size={20} style={{ color: "var(--text-muted)" }} /></button>
           <button style={{ background: "none", border: "none", padding: 0, cursor: "pointer", display: "flex" }}><Bell size={20} style={{ color: "var(--text-muted)" }} /></button>
-          <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: "var(--navy)", color: "#144EED", fontFamily: "var(--font-display)" }}>{initials}</div>
+          <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: "#144EED", color: "white", fontFamily: "var(--font-display)" }}>{initials}</div>
         </div>
       </div>
 
@@ -145,7 +145,7 @@ export default function MedicationsPage() {
                             disabled={takeMed.isPending}
                             onClick={() => takeMed.mutate({ itemId: med.itemId, scheduleTime: med.scheduleTime ?? "", completed: true })}
                             className="text-xs font-semibold px-3 py-1.5 rounded-lg"
-                            style={{ background: "var(--navy)", color: "white", fontFamily: "var(--font-body)", border: "none", cursor: takeMed.isPending ? "wait" : "pointer" }}
+                            style={{ background: "#144EED", color: "white", fontFamily: "var(--font-body)", border: "none", cursor: takeMed.isPending ? "wait" : "pointer", boxShadow: "var(--shadow-blue)" }}
                           >
                             {t("patient.medications.take")}
                           </button>
@@ -167,12 +167,12 @@ export default function MedicationsPage() {
           <p className="text-xs font-semibold" style={{ color: "#144EED" }}>{t("patient.medications.stability")}</p>
         </div>
 
-        <div className="rounded-2xl p-4" style={{ background: "var(--navy)" }}>
+        <div className="rounded-2xl p-4" style={{ background: "var(--bg-hover)", border: "1px solid #BFDBFE" }}>
           <div className="flex items-start gap-2 mb-1.5">
             <Droplets size={16} style={{ color: "#144EED", marginTop: 1, flexShrink: 0 }} />
-            <p className="font-semibold text-sm text-white" style={{ fontFamily: "var(--font-display)" }}>{t("patient.medications.hydrationAlert")}</p>
+            <p className="font-semibold text-sm" style={{ fontFamily: "var(--font-display)", color: "var(--brand-dark)" }}>{t("patient.medications.hydrationAlert")}</p>
           </div>
-          <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>{t("patient.medications.hydrationBody")}</p>
+          <p className="text-xs leading-relaxed" style={{ color: "var(--c-text-2)" }}>{t("patient.medications.hydrationBody")}</p>
         </div>
 
         <div className="flex items-start gap-2.5 p-3.5 rounded-xl" style={{ background: "rgba(217,119,6,0.06)", border: "1px solid rgba(217,119,6,0.18)" }}>

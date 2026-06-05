@@ -15,13 +15,13 @@ function ProfileSkeleton() {
         <Skeleton width={160} height={20} />
         <Skeleton width={110} height={11} />
       </div>
-      <div className="rounded-2xl p-4 mb-4 flex flex-col gap-2.5" style={{ background: "var(--navy)" }}>
+      <div className="rounded-2xl p-4 mb-4 flex flex-col gap-2.5" style={{ background: "var(--bg-card)", border: "1px solid var(--c-border)", boxShadow: "var(--shadow-card)" }}>
         <div className="flex items-center justify-between">
-          <Skeleton width={120} height={11} dark />
-          <Skeleton width={80} height={11} dark />
+          <Skeleton width={120} height={11} />
+          <Skeleton width={80} height={11} />
         </div>
-        <Skeleton width="100%" height={6} radius={999} dark />
-        <Skeleton width={100} height={10} dark />
+        <Skeleton width="100%" height={6} radius={999} />
+        <Skeleton width={100} height={10} />
       </div>
       <div className="rounded-2xl overflow-hidden mb-4" style={{ background: "var(--surface-card)", border: "1px solid var(--border)" }}>
         {[0, 1, 2, 3, 4].map((i) => (
@@ -74,7 +74,7 @@ export default function ProfilePage() {
   return (
     <div className="p-4 pb-8" style={{ background: "var(--surface)" }}>
       <div className="flex flex-col items-center pt-4 pb-6">
-        <div className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mb-3" style={{ background: "var(--navy)", color: "#144EED", fontFamily: "var(--font-display)", border: "2.5px solid rgba(14,165,233,0.3)" }}>
+        <div className="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold mb-3" style={{ background: "linear-gradient(135deg, #144EED, #1039C5)", color: "white", fontFamily: "var(--font-display)", border: "none", boxShadow: "var(--shadow-blue)" }}>
           {initials}
         </div>
         <h1 className="text-xl font-bold" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>{data.fullName}</h1>
@@ -84,15 +84,15 @@ export default function ProfilePage() {
         </div>
       </div>
 
-      <div className="rounded-2xl p-4 mb-4" style={{ background: "var(--navy)" }}>
+      <div className="rounded-2xl p-4 mb-4" style={{ background: "var(--bg-card)", border: "1px solid var(--c-border)", boxShadow: "var(--shadow-card)" }}>
         <div className="flex items-center justify-between mb-2">
           <p className="text-xs font-semibold" style={{ color: "#144EED", fontFamily: "var(--font-display)" }}>{t("patient.profile.recoveryProgress")}</p>
-          <span className="text-xs font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{t("patient.profile.dayOf", { day: postOpDay, total: totalDays })}</span>
+          <span className="text-xs font-bold" style={{ fontFamily: "var(--font-display)", color: "var(--c-text)" }}>{t("patient.profile.dayOf", { day: postOpDay, total: totalDays })}</span>
         </div>
-        <div className="h-1.5 rounded-full mb-2" style={{ background: "rgba(255,255,255,0.1)" }}>
+        <div className="h-1.5 rounded-full mb-2" style={{ background: "var(--bg-app)" }}>
           <div className="h-1.5 rounded-full" style={{ width: `${pct}%`, background: "linear-gradient(90deg, #144EED, #1D4ED8)" }} />
         </div>
-        <p className="text-xs" style={{ color: "rgba(255,255,255,0.45)" }}>{t("patient.profile.percentComplete", { pct })}</p>
+        <p className="text-xs" style={{ color: "var(--c-muted)" }}>{t("patient.profile.percentComplete", { pct })}</p>
       </div>
 
       <div className="rounded-2xl overflow-hidden mb-4" style={{ background: "var(--surface-card)", border: "1px solid var(--border)" }}>

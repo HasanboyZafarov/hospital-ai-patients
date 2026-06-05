@@ -86,7 +86,7 @@ export default function PatientLoginPage() {
   return (
     <div
       style={{
-        background: "var(--navy)",
+        background: "var(--bg-app)",
         minHeight: "100vh",
         width: "100vw",
         display: "flex",
@@ -98,11 +98,21 @@ export default function PatientLoginPage() {
       }}
     >
       <div style={{ position: "absolute", top: 20, right: 20 }}>
-        <LanguageSelect variant="dark" />
+        <LanguageSelect variant="light" />
       </div>
 
-      <div style={{ width: "100%", maxWidth: "380px" }}>
-        <div style={{ display: "flex", justifyContent: "center", marginBottom: "28px" }}>
+      <div
+        style={{
+          width: "100%",
+          maxWidth: "380px",
+          background: "var(--bg-card)",
+          border: "1px solid var(--c-border)",
+          borderRadius: "24px",
+          boxShadow: "var(--shadow-card-lg)",
+          padding: "32px 24px",
+        }}
+      >
+        <div style={{ display: "flex", justifyContent: "center", marginBottom: "20px" }}>
           <div
             style={{
               width: "64px",
@@ -111,27 +121,28 @@ export default function PatientLoginPage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              background: "rgba(14,165,233,0.12)",
-              border: "1.5px solid rgba(14,165,233,0.3)",
+              background: "linear-gradient(135deg, #144EED, #1039C5)",
+              boxShadow: "var(--shadow-blue)",
             }}
           >
-            <LockKeyhole size={28} style={{ color: "#144EED" }} />
+            <LockKeyhole size={28} style={{ color: "white" }} />
           </div>
         </div>
 
-        <div style={{ textAlign: "center", marginBottom: "32px" }}>
+        <div style={{ textAlign: "center", marginBottom: "28px" }}>
           <h1
             style={{
               fontSize: "24px",
-              fontWeight: 700,
-              color: "white",
+              fontWeight: 800,
+              color: "var(--c-text)",
               marginBottom: "8px",
               fontFamily: "var(--font-display)",
+              letterSpacing: "-0.02em",
             }}
           >
             {t("auth.patient.title")}
           </h1>
-          <p style={{ fontSize: "14px", lineHeight: 1.5, color: "var(--text-muted)" }}>
+          <p style={{ fontSize: "14px", lineHeight: 1.5, color: "var(--c-text-2)" }}>
             {t("auth.patient.subtitle")}
           </p>
         </div>
@@ -140,7 +151,7 @@ export default function PatientLoginPage() {
           <p
             style={{
               fontSize: "11px",
-              fontWeight: 600,
+              fontWeight: 700,
               letterSpacing: "0.15em",
               color: "#144EED",
               marginBottom: "12px",
@@ -155,7 +166,7 @@ export default function PatientLoginPage() {
               style={{
                 fontWeight: 700,
                 fontSize: "16px",
-                color: "white",
+                color: "var(--c-text)",
                 fontFamily: "var(--font-display)",
                 flexShrink: 0,
               }}
@@ -192,12 +203,12 @@ export default function PatientLoginPage() {
                     textAlign: "center",
                     fontSize: "22px",
                     fontWeight: 700,
-                    borderRadius: "12px",
+                    borderRadius: "14px",
                     outline: "none",
                     fontFamily: "var(--font-display)",
-                    background: d ? "rgba(14,165,233,0.15)" : "rgba(255,255,255,0.07)",
-                    border: d ? "1.5px solid #144EED" : "1.5px solid rgba(255,255,255,0.12)",
-                    color: "white",
+                    background: d ? "rgba(20,78,237,0.08)" : "var(--bg-input)",
+                    border: d ? "1.5px solid #144EED" : "1.5px solid transparent",
+                    color: "var(--c-text)",
                     caretColor: "#144EED",
                     transition: "all 0.15s ease",
                   }}
@@ -212,7 +223,8 @@ export default function PatientLoginPage() {
                 fontSize: "12px",
                 textAlign: "center",
                 marginBottom: "16px",
-                color: "#FC8181",
+                color: "var(--c-danger)",
+                fontWeight: 600,
               }}
             >
               {error}
@@ -228,19 +240,20 @@ export default function PatientLoginPage() {
               alignItems: "center",
               justifyContent: "center",
               gap: "8px",
-              fontWeight: 600,
+              fontWeight: 700,
               fontSize: "14px",
               height: "52px",
-              borderRadius: "12px",
+              borderRadius: "9999px",
               border: "none",
               background:
                 allFilled && !loading
-                  ? "linear-gradient(135deg, #144EED, #1D4ED8)"
-                  : "rgba(255,255,255,0.08)",
-              color: allFilled && !loading ? "white" : "rgba(255,255,255,0.3)",
+                  ? "linear-gradient(135deg, #144EED, #1039C5)"
+                  : "var(--bg-input)",
+              color: allFilled && !loading ? "white" : "var(--c-muted)",
               cursor: allFilled && !loading ? "pointer" : "not-allowed",
               fontFamily: "var(--font-body)",
               transition: "all 0.15s ease",
+              boxShadow: allFilled && !loading ? "var(--shadow-blue)" : "none",
             }}
           >
             {loading ? t("common.loading") : t("auth.patient.unlock")}
@@ -253,26 +266,26 @@ export default function PatientLoginPage() {
             textAlign: "center",
             fontSize: "12px",
             marginTop: "20px",
-            color: "rgba(255,255,255,0.3)",
+            color: "var(--c-muted)",
           }}
         >
           {t("auth.patient.lostCode")}{" "}
-          <span style={{ color: "#144EED", cursor: "pointer" }}>
+          <span style={{ color: "#144EED", cursor: "pointer", fontWeight: 600 }}>
             {t("auth.patient.contactSupport")}
           </span>
         </p>
-
-        <p
-          style={{
-            textAlign: "center",
-            fontSize: "11px",
-            marginTop: "40px",
-            color: "rgba(255,255,255,0.15)",
-          }}
-        >
-          {t("auth.patient.poweredBy")}
-        </p>
       </div>
+
+      <p
+        style={{
+          textAlign: "center",
+          fontSize: "11px",
+          marginTop: "24px",
+          color: "var(--c-muted)",
+        }}
+      >
+        {t("auth.patient.poweredBy")}
+      </p>
 
       <style>{`
         @keyframes shake {

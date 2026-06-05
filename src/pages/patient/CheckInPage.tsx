@@ -57,36 +57,36 @@ export default function CheckInPage() {
     const advice = result.risk.advice || (isHigh ? t("patient.checkIn.messages.high") : isMed ? t("patient.checkIn.messages.medium") : t("patient.checkIn.messages.low"));
 
     return (
-      <div className="flex flex-col h-full" style={{ background: "var(--navy)" }}>
+      <div className="flex flex-col h-full" style={{ background: "var(--bg-app)" }}>
         <div className="flex-1 flex flex-col items-center justify-center px-5 py-8 gap-5 min-h-0">
           <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ background: riskBg, border: `2px solid ${riskBorder}` }}>
             <RiskIcon size={34} style={{ color: riskColor }} />
           </div>
           <div className="text-center">
             <p className="text-xs font-bold tracking-widest mb-2" style={{ color: riskColor, fontFamily: "var(--font-display)" }}>{t("patient.checkIn.completeBanner", { risk: riskLevel })}</p>
-            <h1 className="text-2xl font-bold text-white mb-2" style={{ fontFamily: "var(--font-display)" }}>{t("patient.checkIn.completeHeading")}</h1>
-            <p className="text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.7)" }}>{advice}</p>
+            <h1 className="text-2xl font-bold mb-2" style={{ fontFamily: "var(--font-display)", color: "var(--c-text)" }}>{t("patient.checkIn.completeHeading")}</h1>
+            <p className="text-sm leading-relaxed" style={{ color: "var(--c-text-2)" }}>{advice}</p>
             {result.risk.alertCreated && (
               <p className="text-xs mt-3 font-semibold" style={{ color: riskColor, fontFamily: "var(--font-display)" }}>
                 {t("patient.checkIn.careTeamNotified", "Your care team has been notified.")}
               </p>
             )}
           </div>
-          <div className="w-full rounded-2xl p-4" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
-            <p className="text-xs font-semibold tracking-widest mb-3 text-center" style={{ color: "rgba(255,255,255,0.3)", fontFamily: "var(--font-display)" }}>{t("patient.checkIn.todaysVitals")}</p>
+          <div className="w-full rounded-2xl p-4" style={{ background: "var(--bg-card)", border: "1px solid var(--c-border)", boxShadow: "var(--shadow-card)" }}>
+            <p className="text-xs font-semibold tracking-widest mb-3 text-center" style={{ color: "var(--c-muted)", fontFamily: "var(--font-display)" }}>{t("patient.checkIn.todaysVitals")}</p>
             <div className="flex">
               <div className="flex-1 text-center">
-                <p className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{painLevel}<span className="text-sm font-normal" style={{ color: "rgba(255,255,255,0.35)" }}>/10</span></p>
-                <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>{t("patient.checkIn.vitals.pain")}</p>
+                <p className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)", color: "var(--c-text)" }}>{painLevel}<span className="text-sm font-normal" style={{ color: "var(--c-muted)" }}>/10</span></p>
+                <p className="text-xs mt-0.5" style={{ color: "var(--c-muted)" }}>{t("patient.checkIn.vitals.pain")}</p>
               </div>
-              <div className="w-px self-stretch" style={{ background: "rgba(255,255,255,0.1)" }} />
+              <div className="w-px self-stretch" style={{ background: "var(--c-border)" }} />
               <div className="flex-1 text-center">
-                <p className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-display)" }}>{temperature}<span className="text-sm font-normal" style={{ color: "rgba(255,255,255,0.35)" }}>°C</span></p>
-                <p className="text-xs mt-0.5" style={{ color: "rgba(255,255,255,0.4)" }}>{t("patient.checkIn.vitals.temp")}</p>
+                <p className="text-2xl font-bold" style={{ fontFamily: "var(--font-display)", color: "var(--c-text)" }}>{temperature}<span className="text-sm font-normal" style={{ color: "var(--c-muted)" }}>°C</span></p>
+                <p className="text-xs mt-0.5" style={{ color: "var(--c-muted)" }}>{t("patient.checkIn.vitals.temp")}</p>
               </div>
             </div>
           </div>
-          <button onClick={() => navigate("/")} className="w-full font-semibold text-sm transition-colors" style={{ height: "52px", borderRadius: "14px", background: "rgba(255,255,255,0.1)", color: "white", fontFamily: "var(--font-body)", border: "1px solid rgba(255,255,255,0.15)", cursor: "pointer" }}>
+          <button onClick={() => navigate("/")} className="w-full font-semibold text-sm transition-colors" style={{ height: "52px", borderRadius: "14px", background: "#144EED", color: "white", fontFamily: "var(--font-body)", border: "none", cursor: "pointer", boxShadow: "var(--shadow-blue)" }}>
             {t("patient.checkIn.backToHome")}
           </button>
         </div>
@@ -104,7 +104,7 @@ export default function CheckInPage() {
           <button onClick={() => navigate(-1)} style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}><ChevronLeft size={20} style={{ color: "var(--text-secondary)" }} /></button>
           <h1 className="font-bold text-base" style={{ fontFamily: "var(--font-display)", color: "var(--text-primary)" }}>{t("patient.checkIn.title")}</h1>
         </div>
-        <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: "var(--navy)", color: "#144EED", fontFamily: "var(--font-display)" }}>
+        <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: "#144EED", color: "white", fontFamily: "var(--font-display)" }}>
           {initials}
         </div>
       </div>
@@ -189,14 +189,14 @@ export default function CheckInPage() {
           <p className="text-xs text-center mt-2 leading-relaxed" style={{ color: "var(--text-muted)" }}>{t("patient.checkIn.encrypted")}</p>
         </div>
 
-        <div className="rounded-2xl p-4" style={{ background: "var(--navy)" }}>
+        <div className="rounded-2xl p-4" style={{ background: "var(--bg-hover)", border: "1px solid #BFDBFE" }}>
           <div className="flex items-start gap-3">
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "rgba(14,165,233,0.2)" }}>
+            <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "rgba(20,78,237,0.12)" }}>
               <Bot size={18} style={{ color: "#144EED" }} />
             </div>
             <div>
-              <p className="font-semibold text-sm text-white mb-1" style={{ fontFamily: "var(--font-display)" }}>{t("patient.checkIn.aiHealthGuide")}</p>
-              <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.55)" }}>{aiInsight}</p>
+              <p className="font-semibold text-sm mb-1" style={{ fontFamily: "var(--font-display)", color: "var(--brand-dark)" }}>{t("patient.checkIn.aiHealthGuide")}</p>
+              <p className="text-xs leading-relaxed" style={{ color: "var(--c-text-2)" }}>{aiInsight}</p>
             </div>
           </div>
         </div>
